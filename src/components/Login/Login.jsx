@@ -1,11 +1,14 @@
 import React from 'react'
-import logoBurgerQueen from '../img/logoBurgerQueen.png'
+import logoBurgerQueen from '../../assets/img/logoBurgerQueen.png'
 
 const Login = () => {
 
+//capturar los inputs
+//hacer la función que valide las credenciales
+//fetch('${Api}') =>
+//if(user === Api.user){
+  //redirect => segunda vista
   
-
-
   return (
     <main className='container'>
       <section className='imgPrincipal'>
