@@ -1,0 +1,23 @@
+.SelectorRol{
+    background-color: white;
+}
+.Navbar{
+    display: flex;
+    font-family: Just Another Hand;
+    background-color: #F2A206;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.Navbar h3{
+    font-size: 40px;
+    margin-left: 3%;
+}
+.Navbar-btn{
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+h1{
+    color: red;
+    height: 100vh;
+}
