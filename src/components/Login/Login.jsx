@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../assets/css/login.css";
 import Api from "../../utils/Api";
@@ -9,23 +9,13 @@ import SelectorRol from "../SelectorRol/SelectorRol";
 const Login = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null)
+  const [invalidData, setInvalidData] = useState(null)
   const Navigate = useNavigate();
 
   const validarLogin = (e) => {
     e.preventDefault();
 
     const data = { email: user, password: password };
-
-    if (!user.trim()) {
-      setError("User invalid")
-      return;
-    }
-
-    if (!password.trim()) {
-      setError("Password invalid")
-      return;
-    }
 
     fetch(`${Api}/login`, {
       method: "POST", // or 'PUT'
@@ -34,33 +24,33 @@ const Login = () => {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
-      .catch((error) => console.error("Error:", error))
-      .then((response) => localStorage.setItem('userToken', response.accessToken))
-      Navigate('/SelectorRol')
+    .then(res => res.json())
+    .catch((error) => console.error("Error:", error))
+    .then((response) => {
+      console.log(response)
+      if(response.accessToken){
+        localStorage.setItem('userToken', response.accessToken);
+        Navigate('/SelectorRol')
+      }else{
+        setInvalidData(response)
+      }
+    })    
+    
       
 
     e.target.reset();
     setUser(" ");
     setPassword(" ");
-    setError(null)
+    setInvalidData(null);
   };
 
   return (
-    <Fragment>
       <main className="login">
           <form className="LoginForm" onSubmit={validarLogin}>
             <h3>Burger Queen</h3>
             <h4>Enter your credentials to Login</h4>
             <div className="form-Input">
             <img src={userIcon} alt="IconUser" />
-              {
-                error && (
-                  <div className="alert alert-danger">
-                    {error}
-                  </div>
-                )
-              }
             <input
               type="email"
               id="email"
@@ -70,13 +60,6 @@ const Login = () => {
             </div>
             <div className="form-Input">
             <img src={keyIcon} alt="IconPassword" />
-            {
-                error && (
-                  <div className="alert alert-danger">
-                    {error}
-                  </div>
-                )
-              }
             <input
               type="password"
               id="password"
@@ -87,9 +70,15 @@ const Login = () => {
             <button className="btn-login" type="submit">
               Login
             </button>
+              {
+                  invalidData && (
+                    <div className="alert alert-danger">
+                      {invalidData}
+                    </div>
+                  )
+                }
           </form>
       </main>
-    </Fragment>
   );
 };
 
