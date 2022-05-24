@@ -60,7 +60,9 @@ body{
     background-color: #F2A206;
     font-size: 25px;
 }
-
+.alert-danger{
+font-size: 20px;
+}
 @media (min-width: 1200px){
     .login{
         display: flex;

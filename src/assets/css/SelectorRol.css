@@ -25,9 +25,9 @@
     background-position-x: right;
     background-size: contain;
 }
-.SelectorRol-body button{
-    width: 150px;
-    height: 150px;
+.btn{
+    width: 200px;
+    height: 200px;
     border-radius: 200px;
     display: flex;
     flex-direction: column;

@@ -14,14 +14,13 @@ const SelectorRol = () => {
       </nav>
 
       <section className='SelectorRol-body'>
-        <button>
+        <Link to="/Pedidos" className="btn" id="Mesero" >Mesero
           <img src={mesero} alt="LogoMesero" />
-          <Link to="/Pedidos" id="Mesero" >Mesero</Link>
-        </button>
-        <button>
-        <img src={cocinero} alt="LogoCocinero" />
-          <Link to="/ListarPedidos" id="Cocinero" >Cocinero</Link>
-        </button>
+        </Link>
+
+        <Link to="/ListarPedidos" className="btn" id="Cocinero" >Cocinero
+          <img src={cocinero} alt="LogoCocinero" />
+        </Link>
         
       </section>
     </div>

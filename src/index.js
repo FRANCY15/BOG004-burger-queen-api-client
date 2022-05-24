@@ -9,7 +9,6 @@ import Login from './components/Login/Login';
 import SelectorRol from './components/SelectorRol/SelectorRol';
 import ListarPedidos from './components/VistasMesero/ListarPedidos';
 import Pedidos from './components/VistasMesero/Pedidos';
-import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

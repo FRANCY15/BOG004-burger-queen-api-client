@@ -9,7 +9,8 @@ import SelectorRol from "../SelectorRol/SelectorRol";
 const Login = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [error, setError] = useState(null)
+  const Navigate = useNavigate();
 
   const validarLogin = (e) => {
     e.preventDefault();
@@ -17,12 +18,12 @@ const Login = () => {
     const data = { email: user, password: password };
 
     if (!user.trim()) {
-      console.log("Por favor ingrese un Usuario válido");
+      setError("User invalid")
       return;
     }
 
     if (!password.trim()) {
-      console.log("Por favor ingrese su contraseña");
+      setError("Password invalid")
       return;
     }
 
@@ -36,12 +37,13 @@ const Login = () => {
       .then((res) => res.json())
       .catch((error) => console.error("Error:", error))
       .then((response) => localStorage.setItem('userToken', response.accessToken))
-      navigate('/SelectorRol')
+      Navigate('/SelectorRol')
       
 
     e.target.reset();
     setUser(" ");
     setPassword(" ");
+    setError(null)
   };
 
   return (
@@ -52,6 +54,13 @@ const Login = () => {
             <h4>Enter your credentials to Login</h4>
             <div className="form-Input">
             <img src={userIcon} alt="IconUser" />
+              {
+                error && (
+                  <div className="alert alert-danger">
+                    {error}
+                  </div>
+                )
+              }
             <input
               type="email"
               id="email"
@@ -61,6 +70,13 @@ const Login = () => {
             </div>
             <div className="form-Input">
             <img src={keyIcon} alt="IconPassword" />
+            {
+                error && (
+                  <div className="alert alert-danger">
+                    {error}
+                  </div>
+                )
+              }
             <input
               type="password"
               id="password"
