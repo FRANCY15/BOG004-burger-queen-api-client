@@ -5,6 +5,7 @@ import Api from "../../utils/Api";
 import userIcon from '../../assets/img/user'
 import keyIcon from '../../assets/img/key'
 import SelectorRol from "../SelectorRol/SelectorRol";
+import ListarPedidos from "../VistasMesero/ListarPedidos";
 
 const Login = () => {
   const [user, setUser] = useState("");
@@ -27,10 +28,10 @@ const Login = () => {
     .then(res => res.json())
     .catch((error) => console.error("Error:", error))
     .then((response) => {
-      // console.log(response)
-      if(response.accessToken){
-        localStorage.setItem('userToken', response.accessToken);
-        Navigate('/SelectorRol')
+      if(response.accessToken && response.user.roles.admin === false ){
+          Navigate('/SelectorRol')
+      }else if(response.accessToken && response.user.roles.admin === true){
+          Navigate('/AdminColaborator')
       }else{
         setInvalidData(response)
       }

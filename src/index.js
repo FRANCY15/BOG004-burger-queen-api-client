@@ -5,6 +5,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import AdminColaborator from './components/Admin/AdminColaborator';
 import Login from './components/Login/Login';
 import SelectorRol from './components/SelectorRol/SelectorRol';
 import ListarPedidos from './components/VistasMesero/ListarPedidos';
@@ -18,6 +19,7 @@ root.render(
       <Route path="/SelectorRol" element={< SelectorRol/>} />
       <Route path="/Pedidos" element={< Pedidos/>} />
       <Route path="/ListarPedidos" element={< ListarPedidos/>} />
+      <Route path="/AdminColaborator" element={< AdminColaborator/>} />
     </Routes>
   </BrowserRouter>
 );
