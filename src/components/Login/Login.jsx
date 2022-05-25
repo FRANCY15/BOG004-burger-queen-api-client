@@ -11,7 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [invalidData, setInvalidData] = useState(null)
   const Navigate = useNavigate();
-
+    
   const validarLogin = (e) => {
     e.preventDefault();
 
@@ -27,7 +27,7 @@ const Login = () => {
     .then(res => res.json())
     .catch((error) => console.error("Error:", error))
     .then((response) => {
-      console.log(response)
+      // console.log(response)
       if(response.accessToken){
         localStorage.setItem('userToken', response.accessToken);
         Navigate('/SelectorRol')
@@ -56,6 +56,7 @@ const Login = () => {
               id="email"
               placeholder="enter your email"
               onChange={(e) => setUser(e.target.value)}
+              data-testid="login-email-input"
             />
             </div>
             <div className="form-Input">
@@ -65,14 +66,15 @@ const Login = () => {
               id="password"
               placeholder="enter your password"
               onChange={(e) => setPassword(e.target.value)}
+              data-testid="login-password-input"
             />
             </div>
-            <button className="btn-login" type="submit">
+            <button className="btn-login" type="submit" data-testid="login-btn">
               Login
             </button>
               {
                   invalidData && (
-                    <div className="alert alert-danger">
+                    <div className="alert alert-danger" data-testid="login-error-message">
                       {invalidData}
                     </div>
                   )
