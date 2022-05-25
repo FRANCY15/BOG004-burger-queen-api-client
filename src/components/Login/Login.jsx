@@ -28,6 +28,7 @@ const Login = () => {
     .then(res => res.json())
     .catch((error) => console.error("Error:", error))
     .then((response) => {
+      console.log('RESPONSE',response)
       if(response.accessToken && response.user.roles.admin === false ){
           Navigate('/SelectorRol')
       }else if(response.accessToken && response.user.roles.admin === true){
@@ -73,7 +74,7 @@ const Login = () => {
             <button className="btn-login" type="submit" data-testid="login-btn">
               Login
             </button>
-              {
+                {
                   invalidData && (
                     <div className="alert alert-danger" data-testid="login-error-message">
                       {invalidData}
