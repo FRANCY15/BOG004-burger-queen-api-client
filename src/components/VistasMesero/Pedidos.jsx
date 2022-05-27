@@ -15,6 +15,7 @@ const Pedidos = () => {
             <label htmlFor="">Food</label>
             <select name="food" id="food">
               <option value=""></option>
+              <option value=""></option>
             </select>
           </form>
         </section>
