@@ -8,7 +8,7 @@ import cocinero from '../../assets/img/cocinero.png'
 const SelectorRol = () => {
 
   return (
-    <div className='SelectorRol'>
+    <div className='SelectorRol' data-testid='vista-adminfalse'>
       <nav className='Navbar'>
         <h3>Burger Queen</h3>
       </nav>

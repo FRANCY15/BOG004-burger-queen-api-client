@@ -11,7 +11,7 @@ const Login = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [invalidData, setInvalidData] = useState(null)
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
     
   const validarLogin = (e) => {
     e.preventDefault();
@@ -30,9 +30,10 @@ const Login = () => {
     .then((response) => {
       console.log('RESPONSE',response)
       if(response.accessToken && response.user.roles.admin === false ){
-          Navigate('/SelectorRol')
+          navigate('/SelectorRol')
       }else if(response.accessToken && response.user.roles.admin === true){
-          Navigate('/AdminColaborator')
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+          navigate('/AdminColaborator')
       }else{
         setInvalidData(response)
       }
