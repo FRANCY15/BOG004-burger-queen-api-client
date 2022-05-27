@@ -2,7 +2,7 @@ import '../../assets/css/Orders.css'
 import Navbar from "../shared/Navbar"
 
 
-const Pedidos = () => {
+const Pedidos = (props) => {
   return (
       <div className="Orders">
         <Navbar/>
