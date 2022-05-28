@@ -1,0 +1,24 @@
+.Orders{
+    background-color: white;
+    
+}
+
+.body-orders{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-evenly;
+    margin-left: 10%;
+    background-image: url('../img/fondoBurger.png');
+    opacity: 0.6;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-size: contain;
+}
+.new-order{
+    display: flex;
+    opacity: 1;
+    color: black;
+}

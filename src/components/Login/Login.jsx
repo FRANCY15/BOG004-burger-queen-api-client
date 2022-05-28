@@ -39,8 +39,6 @@ const Login = () => {
       }
     })    
     
-      
-
     e.target.reset();
     setUser(" ");
     setPassword(" ");
