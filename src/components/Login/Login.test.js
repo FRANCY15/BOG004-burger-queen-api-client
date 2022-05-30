@@ -4,7 +4,6 @@ import {
   fireEvent,
   waitFor,
   screen,
-  getByText,
 } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Login from "./Login";
@@ -26,8 +25,8 @@ test("Login component", async () => {
   const btnLogin = screen.getByText("Login");
   fireEvent.click(btnLogin);
   // let errMnsj;
-  await waitFor(async () => {
-    const errMnsj = await screen.getByText("Cannot find user");
+  await waitFor(() => {
+    const errMnsj = screen.getByText("Cannot find user");
     expect(errMnsj.textContent).toBe("Cannot find user");
   });
   // debug();
