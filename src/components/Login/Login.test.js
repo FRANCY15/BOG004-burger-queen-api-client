@@ -5,11 +5,12 @@ import {
   waitFor,
   screen,
 } from "@testing-library/react";
+import userEvent from '@testing-library/user-event';
 import "@testing-library/jest-dom";
 import Login from "./Login";
 import AdminColaborator from "../Admin/AdminColaborator";
 import { createMemoryHistory } from "history";
-import { Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 test("Login component", async () => {
   const history = createMemoryHistory();
@@ -32,7 +33,7 @@ test("Login component", async () => {
   // debug();
 });
 
-test.only("Login component", async () => {
+test.only("Login component success", async () => {
   const history = createMemoryHistory();
   const { debug } = render(
     <Router location={history.location} navigator={history}>
@@ -42,6 +43,7 @@ test.only("Login component", async () => {
       </Routes>
     </Router>
   );
+  const user = userEvent.setup()
   const emaiInput = screen.getByTestId("login-email-input");
   const passwordInput = screen.getByTestId("login-password-input");
   fireEvent.change(emaiInput, {
@@ -49,13 +51,10 @@ test.only("Login component", async () => {
   });
   fireEvent.change(passwordInput, { target: { value: "123456" } });
   const btnLogin = screen.getByTestId("login-btn");
-  fireEvent(btnLogin, new MouseEvent("click"));
+  await user.click(btnLogin);
 
-  let windowTwo;
-  await waitFor(async () => {
-    debug();
-    await screen.findByText("Hola! Soy el Administrador!!!!!!!!");
+  await waitFor(() => {
+    const admin = screen.getByText("Hola! Soy el Administrador!!!!!!!!");
+    expect(admin).toBeInTheDocument();
   });
-  // debug();
-  //   expect(windowTwo.getByTestId("vista-adminfalse")).toBeInTheDocument();
 });
