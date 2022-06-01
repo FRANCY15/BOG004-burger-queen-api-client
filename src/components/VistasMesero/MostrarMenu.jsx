@@ -7,6 +7,9 @@ import { useState } from 'react';
 const MostrarMenu = () => {
 
     const [products, setProducts] = useState([]);
+    const [agregProduct, setAgregProduct] = useState([]);
+    let newOrder = [];
+
     
     let menu = []; 
     const token = userToken;
@@ -33,15 +36,31 @@ const MostrarMenu = () => {
     })
     }
 
-    const [agregarProduct, setagregarProduct] = useState('');
+    const agregarProducto = (item) => {
+      newOrder.push(item)
+      console.log(newOrder)
+    }
+
+    // const mostrarOrden = (arrayProducts) => {
+    //   newOrder.map((item)=>{
+    //     <table>
+    //       <tr>
+    //         <th>
+    //           <td>{item.id}</td>
+    //           <td>{item.name}</td>
+    //           <td>{item.price}</td>
+    //         </th>
+    //       </tr>
+    //     </table>
+    //   })
+    // }
     
-    const agregarProducto = () => {
-      console.log(agregarProduct)
+    const borrarProducto = (item) => {
+      newOrder.pop(item.id)
+      console.log(newOrder)
     }
-    const borrarProducto = () => {
-      console.log(menu)
-    }
-  
+
+
 
     return (
         <>
@@ -56,17 +75,26 @@ const MostrarMenu = () => {
                   <img src={item.image} alt="Product" width="150px" height="100px"/>
                 <div className='btn-options'>
                   <button 
-                  onClick={() => {agregarProducto()}} className='btn-add' 
+                  className='btn-add' 
                   key={item.id}
-                  onChange={(e) => {setagregarProduct(e.target.value)}} >Agregar</button>
+                  onClick={() => {agregarProducto(item)}}
+                  >Agregar</button>
                   <button 
-                  onClick={() => {borrarProducto()}} className='btn-delete' key={item.id}>Eliminar</button>
+                  className='btn-delete' 
+                  key={item.id}
+                  onClick={() => {borrarProducto(item)}}
+                  >Eliminar</button>
                 </div>
                 </div>
               </div>
             ))
           }
           </div>
+          {/* <div>
+            {
+              mostrarOrden([newOrder])
+            }
+          </div> */}
         </>
       )}
 

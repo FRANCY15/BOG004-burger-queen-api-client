@@ -6,15 +6,14 @@ import NewOrder from './NewOrder'
 import FormClient from './FormClient'
 
 
-const Pedidos = (props) => {
+const Pedidos = () => {
 
 
 return(
   <>
     <Navbar/>
-    <MostrarMenu/>
+    <MostrarMenu />
     <FormClient/>
-    <NewOrder />
   </>
 )}
 
