@@ -1,71 +1,37 @@
 import "../../assets/css/Orders.css";
 import Navbar from "../shared/Navbar";
+import React, { useState } from "react";
+import MostrarMenu from "./MostrarMenu";
+
+import FormClient from "./FormClient";
 
 const Pedidos = () => {
+  const [newOrder, setNewOrder] = useState([]);
+  // let newOrder = []; // Variable de estado
+
+  const agregarProducto = (item) => {
+    let resultNewProducts = newOrder.push(item);
+    setNewOrder(resultNewProducts);
+    console.log(resultNewProducts);
+  };
+
+  const borrarProducto = (item) => {
+    if (newOrder.includes(item)) {
+     let resultEraserProducts = newOrder.splice(newOrder.indexOf(item), 1);
+     setNewOrder(resultEraserProducts)
+     console.log(resultEraserProducts);
+    }
+  };
+
   return (
-    <div className="Orders">
+    <>
       <Navbar />
-      <section className="body-orders">
-        <p>User : Fulanito de Tal</p>
-        <form className="new-order">
-          <label htmlFor="id">Id Order</label>
-          <input type="text" name="id" id="order" disabled />
-          <label htmlFor="client">Client</label>
-          <input type="text" name="client" id="client" />
-          <label htmlFor="table">Table</label>
-          <input type="text" name="table" id="table" />
-          </form>
-          <form>
-          <label htmlFor="">Food</label>
-          <select name="Food" id="food">
-            <option value=""></option>
-          </select>
-          <label htmlFor="">Drinks</label>
-          <select name="drinks" id="drinks">
-            <option value=""></option>
-          </select>
-        </form>
-      </section>
-      <section>
-        <h2>You Order</h2>
-        <table>
-          <tr>
-            <th>Menú</th>
-            <th>Quantity</th>
-            <th>Unit Value</th>
-            <th>Total Value</th>
-          </tr>
-
-          <tr>
-            <td></td>            
-          </tr>
-
-          <tr>
-            <td></td>            
-          </tr>
-
-          <tr>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td></td>
-          </tr>
-        </table>
-        <tfoot>
-          <tr>
-            <th>
-              Total Order
-            </th>
-            <th>
-              $ 0000000
-            </th>
-          </tr>
-        </tfoot>
-        <button>Delete</button>
-        <button>Send</button>
-      </section>
-    </div>
+      <MostrarMenu
+        agregarProducto={agregarProducto}
+        borrarProducto={borrarProducto}
+      />
+      <FormClient />
+    </>
   );
 };
 

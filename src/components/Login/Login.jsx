@@ -4,8 +4,10 @@ import "../../assets/css/login.css";
 import Api from "../../utils/Api";
 import userIcon from '../../assets/img/user'
 import keyIcon from '../../assets/img/key'
-import SelectorRol from "../SelectorRol/SelectorRol";
-import ListarPedidos from "../VistasMesero/ListarPedidos";
+
+
+
+export const userToken = localStorage.getItem('userToken') 
 
 const Login = () => {
   const [user, setUser] = useState("");
@@ -28,11 +30,11 @@ const Login = () => {
     .then(res => res.json())
     .catch((error) => console.error("Error:", error))
     .then((response) => {
-      console.log('RESPONSE',response)
+      localStorage.setItem('userToken', response.accessToken)
       if(response.accessToken && response.user.roles.admin === false ){
           navigate('/SelectorRol')
       }else if(response.accessToken && response.user.roles.admin === true){
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        console.log('aaaaaaaa')
           navigate('/AdminColaborator')
       }else{
         setInvalidData(response)
