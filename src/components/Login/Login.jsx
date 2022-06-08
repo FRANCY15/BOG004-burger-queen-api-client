@@ -8,6 +8,7 @@ import keyIcon from '../../assets/img/key'
 
 
 export const userToken = localStorage.getItem('userToken') 
+export const userId = localStorage.getItem('userId');
 
 const Login = () => {
   const [user, setUser] = useState("");
@@ -31,6 +32,8 @@ const Login = () => {
     .catch((error) => console.error("Error:", error))
     .then((response) => {
       localStorage.setItem('userToken', response.accessToken)
+      localStorage.setItem('userId', response.user.id)
+
       if(response.accessToken && response.user.roles.admin === false ){
           navigate('/SelectorRol')
       }else if(response.accessToken && response.user.roles.admin === true){

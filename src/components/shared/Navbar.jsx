@@ -14,8 +14,8 @@ const Navbar = () => {
   return (
     <nav className='Navbar'>
         <h3>Burger Queen</h3>
-        <Link to="/Pedidos" className="Navbar-btn">New order</Link>
-        <Link to="/Mostrarordenes" className="Navbar-btn">Mostrar Ordenes</Link>
+        <Link to="/PruebaCruds" className="Navbar-btn">New order</Link>
+        <Link to="/OrdersApi" className="Navbar-btn">Mostrar Ordenes</Link>
         <button className="Navbar-btn" onClick={() => {cerrar()}}>LogOut</button>
     </nav>
   )

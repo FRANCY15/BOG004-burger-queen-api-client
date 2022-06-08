@@ -14,7 +14,7 @@ const SelectorRol = () => {
       </nav>
 
       <section className='SelectorRol-body'>
-        <Link to="/Pedidos" className="btn" id="Mesero" >Mesero
+        <Link to="/PruebaCruds" className="btn" id="Mesero" >Mesero
           <img src={mesero} alt="LogoMesero" />
         </Link>
 
