@@ -1,9 +1,33 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import Api from "../../utils/Api";
+import { helpHttp } from "../helpers/helpHttp";
+import Navbar from "../shared/Navbar";
 import TableRowOrders from "./TableRowOrders";
 
-const TableOrders = ({ data, setDataToEdit, deleteData }) => {
+const TableOrders = ({ setDataToEdit, deleteData }) => {
+
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+
+  let url = `${Api}/orders`;
+
+  useEffect(() => {
+    helpHttp()
+      .get(url)
+      .then((res) => {
+        console.log(res)
+        if (!res.err) {
+          setData(res);
+          setError(null);
+        } else {
+          setError(res);
+        }
+      });
+  }, []);
+
   return (
     <div>
+      <Navbar/>
       <h3>Esta es tu Orden</h3>
       <table>
         <thead>
@@ -23,8 +47,6 @@ const TableOrders = ({ data, setDataToEdit, deleteData }) => {
               <TableRowOrders
                 key={el.id}
                 el={el}
-                setDataToEdit={setDataToEdit}
-                deleteData={deleteData}
               />
             ))
           )}

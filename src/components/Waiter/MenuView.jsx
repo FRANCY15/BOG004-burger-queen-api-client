@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from "react";
 import Api from "../../utils/Api";
-import { userToken } from "../Login/Login";
 import { helpHttp } from "../helpers/helpHttp";
+import "../../assets/css/MenuView.css";
 
 export const newOrder = [];
 const MenuView = () => {
   const [products, setProducts] = useState([]);
-  // const [newOrder, setNewOrder] = useState([]);
+  const [option, setOption] = useState('');
+  const [typeMn, setTypeMn] = useState([])
+
 
   let menu = [];
-  
 
   useEffect(() => {
     helpHttp()
       .get(`${Api}/products`)
       .then((res) => {
         if (!res.err) {
-          setProducts(res);          
+          setProducts(res);
         } else {
-          setProducts(null);         
-        }       
+          setProducts(null);
+        }
       });
   }, []);
-  
-  // let newOrder = []; // Variable de estado
 
   const agregarProducto = (item) => {
     newOrder.push(item);
@@ -39,11 +38,31 @@ const MenuView = () => {
     }
   };
 
+  const elegirMenu = () => {
+    if(option === 'Almuerzo'){
+        let resultado = products.filter((product) => product.type === "Almuerzo");
+        setTypeMn(resultado)
+        
+    }else if(option === 'Desayuno'){
+        let resultado = products.filter((product) => product.type === "Desayuno");
+        setTypeMn(resultado)
+    }
+  }
+
   return (
-      
     <>
       <div className="viewMenu">
-        {products.map((item) => (
+        <label htmlFor="SelectMenu">Seleccionar Menu</label>
+        <select onChange={(e) => setOption(e.target.value)} onClick={()=>{elegirMenu()}} name="opciones">
+          <option selected>Elija una opción</option>
+          <option key="Alm" value="Almuerzo">
+            Almuerzo
+          </option>
+          <option key="Des" value="Desayuno">
+            Desayuno
+          </option>
+        </select>
+        {typeMn.map((item) => (
           <div className="optionsMenu" key={item.id}>
             <div className="bodyMenu">
               <h2>{item.type}</h2>
@@ -72,11 +91,6 @@ const MenuView = () => {
           </div>
         ))}
       </div>
-      {/* <div>
-            {
-              mostrarOrden([newOrder])
-            }
-          </div> */}
     </>
   );
 };

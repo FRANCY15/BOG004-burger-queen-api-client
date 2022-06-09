@@ -1,22 +1,5 @@
 import React, { useState } from "react";
 
-const ordersDefault = [
-    {
-        name: 'P1',
-        qty: 1,
-        price: 5
-    },
-    {
-        name: 'P2',
-        qty: 1,
-        price: 5
-    },
-    {
-        name: 'P3',
-        qty: 1,
-        price: 5
-    }
-]
 
 const Clientorders = ({products}) => {
     // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', products)

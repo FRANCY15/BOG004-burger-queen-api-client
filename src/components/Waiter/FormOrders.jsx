@@ -23,13 +23,6 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
     }
   }, [dataToEdit]);
 
-  // const orderClient = {
-  //   "userId": userId,
-  //   "products": newOrder,
-  //   "status": "",
-  //   "dateEntry": Date.now()
-  // };
-
 
  
   const handleChange = (e) => {
@@ -60,13 +53,6 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
     }
     console.log("este es form.id", form.id);
     createData(form);
-    // if (form.id === null) {
-
-    //   createData(form);
-    // } else {
-    //   console.log("este es form", form);
-    //   updateData(form);
-    // }
     handleReset();
   };
 

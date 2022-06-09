@@ -4,9 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminColaborator from "./components/Admin/AdminColaborator";
 import Login from "./components/Login/Login";
 import SelectorRol from "./components/SelectorRol/SelectorRol";
-import Orders from "./components/Waiter/Orders";
 import OrdersApi from "./components/Waiter/OrdersApi";
 import PruebaCruds from "./components/Waiter/PruebaCruds";
+import TableOrders from "./components/Waiter/TableOrders";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,6 +17,7 @@ root.render(
       <Route path="/AdminColaborator" element={<AdminColaborator />} />
       <Route path="/PruebaCruds" element={<PruebaCruds />} />
       <Route path="/OrdersApi" element={<OrdersApi />} />
+      <Route path="/TableOrders" element={<TableOrders />} />
     </Routes>
   </BrowserRouter>
 );

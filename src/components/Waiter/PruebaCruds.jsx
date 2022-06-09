@@ -8,9 +8,9 @@ const PruebaCruds = () => {
   return (
     <div>
         <Navbar/>
-        <OrdersApi/>       
-        <hr />
         <MenuView/>
+        <hr />
+        <OrdersApi/>       
     </div>
   )
 }

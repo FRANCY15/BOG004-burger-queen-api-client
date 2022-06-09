@@ -34,8 +34,8 @@ const OrdersApi = () => {
       });
   }, []);
 
-  let token = userToken;
-  // console.log("este es el token", tokenhelper);
+  // let token = userToken;
+  // // console.log("este es el token", tokenhelper);
 
   const createData = (data) => {
     console.log("esto es data", data);
@@ -94,13 +94,13 @@ const OrdersApi = () => {
           bgColor="#dc3545"
         />
       )}
-      {dbOrders && (
+      {/* {dbOrders && (
         <TableOrders
           data={dbOrders}
           deleteData={deleteData}
           setDataToEdit={setDataToEdit}
         />
-      )}
+      )} */}
     </div>
   );
 };
