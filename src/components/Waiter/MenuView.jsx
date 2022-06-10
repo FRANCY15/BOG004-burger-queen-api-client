@@ -4,11 +4,11 @@ import { helpHttp } from "../helpers/helpHttp";
 import "../../assets/css/MenuView.css";
 
 export const newOrder = [];
+
 const MenuView = () => {
   const [products, setProducts] = useState([]);
   const [option, setOption] = useState('');
-  const [typeMn, setTypeMn] = useState([])
-
+  const [typeMn, setTypeMn] = useState([]);  
 
   let menu = [];
 
@@ -25,18 +25,22 @@ const MenuView = () => {
   }, []);
 
   const agregarProducto = (item) => {
+    item = {
+      qty: 1,
+      ...item
+    }
     newOrder.push(item);
-    //   setNewOrder(resultNewProducts);
     console.log(newOrder);
   };
 
   const borrarProducto = (item) => {
-    if (newOrder.includes(item)) {
-      newOrder.splice(newOrder.indexOf(item), 1);
-      //    setNewOrder(resultEraserProducts)
+    newOrder.map((el) => {
+      if(el.id === item.id){
+        newOrder.splice(newOrder.indexOf(el), 1);
+      }
+    })
       console.log(newOrder);
-    }
-  };
+  }
 
   const elegirMenu = () => {
     if(option === 'Almuerzo'){
@@ -51,10 +55,9 @@ const MenuView = () => {
 
   return (
     <>
-      <div className="viewMenu">
         <label htmlFor="SelectMenu">Seleccionar Menu</label>
         <select onChange={(e) => setOption(e.target.value)} onClick={()=>{elegirMenu()}} name="opciones">
-          <option selected>Elija una opción</option>
+          <option defaultValue={setOption}>Elija una opción</option>
           <option key="Alm" value="Almuerzo">
             Almuerzo
           </option>
@@ -62,6 +65,8 @@ const MenuView = () => {
             Desayuno
           </option>
         </select>
+        <hr />
+      <div className="viewMenu">
         {typeMn.map((item) => (
           <div className="optionsMenu" key={item.id}>
             <div className="bodyMenu">
@@ -76,7 +81,7 @@ const MenuView = () => {
                     agregarProducto(item);
                   }}
                 >
-                  Agregar
+                  +
                 </button>
                 <button
                   className="btn-delete"
@@ -84,7 +89,7 @@ const MenuView = () => {
                     borrarProducto(item);
                   }}
                 >
-                  Eliminar
+                  -
                 </button>
               </div>
             </div>

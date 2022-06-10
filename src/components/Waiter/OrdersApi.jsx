@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { helpHttp } from "../helpers/helpHttp";
 import FormOrders from "./FormOrders";
-import TableOrders from "./TableOrders";
 import Api from "../../utils/Api";
 import Loader from "../Loader/Loader";
 import Message from "../Loader/Message";
-import { logDOM } from "@testing-library/react";
-import { userToken } from "../Login/Login";
-import Navbar from "../shared/Navbar";
+
 
 const OrdersApi = () => {
   const [dbOrders, setdbOrders] = useState(null);
@@ -34,19 +31,11 @@ const OrdersApi = () => {
       });
   }, []);
 
-  // let token = userToken;
-  // // console.log("este es el token", tokenhelper);
-
   const createData = (data) => {
     console.log("esto es data", data);
-    // data.id = Date.now();
     api
       .post(url, {
         body: data
-        // headers: {
-        //   "Content-Type": "application/json",
-        //   authorization: "Bearer " + token,
-        // },
       })
       .then((res) => {
         console.log("esto es res",res);
@@ -94,13 +83,6 @@ const OrdersApi = () => {
           bgColor="#dc3545"
         />
       )}
-      {/* {dbOrders && (
-        <TableOrders
-          data={dbOrders}
-          deleteData={deleteData}
-          setDataToEdit={setDataToEdit}
-        />
-      )} */}
     </div>
   );
 };

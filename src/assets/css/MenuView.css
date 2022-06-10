@@ -1,4 +1,20 @@
 .viewMenu{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: #FFFCAB;
+    height: auto;
+    place-items: center;
+}
+.optionsMenu{
+    background-color: #FFC632;
+    margin: 15px;
+    padding: 10px;
+    width: 200px;
+    border-radius: 10px;
+}
+.btn-delete, .btn-add{
+    border-radius: 5px;
+    width: 35px;
+    height: 35px;
+    font-size: 30px;
 }
