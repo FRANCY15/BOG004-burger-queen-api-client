@@ -8,6 +8,14 @@ const PruebaCruds = () => {
   return (
     <div>
         <Navbar/>
+<<<<<<< HEAD
+=======
+        {/* // componente con nombre de cliente */}
+        <hr />
+        <OrdersApi/>       
+        <hr />
+        {/* componente resumen del pedido  */}
+>>>>>>> bf6eefe (cambios vista mesero)
         <MenuView/>
         <hr />
         <OrdersApi/>       
