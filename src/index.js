@@ -16,18 +16,6 @@ root.render(
       <Route path="/SelectorRol" element={<SelectorRol />} />
       <Route path="/AdminColaborator" element={<AdminColaborator />} />
       <Route path="/PruebaCruds" element={<PruebaCruds />} />
-      <Route
-        path="/TableOrders"
-        element={
-          dbOrders && (
-            <TableOrders
-              data={dbOrders}
-              deleteData={deleteData}
-              setDataToEdit={setDataToEdit}
-            />
-          )
-        }
-      />
       <Route path="/OrdersApi" element={<OrdersApi />} />
       <Route path="/TableOrders" element={<TableOrders />} />
     </Routes>
