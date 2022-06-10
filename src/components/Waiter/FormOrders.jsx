@@ -13,7 +13,7 @@ const initialForm = {
 
 const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
   const [form, setForm] = useState(initialForm);
-  
+  const [statusOrder, setStatusOrder] = useState('')
 
   useEffect(() => {
     if (dataToEdit) {
@@ -31,15 +31,8 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
       [e.target.name]: e.target.value,
      
     "userId": userId,
-    "products":  newOrder.map((obj)=>{
-      return {
-        "qty": 1,
-        "product":{
-          ...obj          
-        }
-      }
-     }),
-    "status": "",
+    "products":  newOrder,
+    "status": 'Pending',
     "dateEntry": Date.now()
     });
   };
@@ -66,7 +59,7 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
       <td>{entry.name}</td>
       <td>{entry.price}</td>
       <td>{entry.type}</td>
-      <td></td>
+      <td>{entry.qty}</td>
       <td></td>
     </tr>
 ));

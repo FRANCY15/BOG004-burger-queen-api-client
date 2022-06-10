@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 
 const Clientorders = ({products}) => {
-    // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', products)
+
   const [orders, setOrders] = useState(products);
   let ordersclient = orders?.map((entry) => (
       
@@ -13,7 +13,6 @@ const Clientorders = ({products}) => {
         </tr>
         
   ));
-  // setOrders([...orders]);
 
   return (
     <table className="table">

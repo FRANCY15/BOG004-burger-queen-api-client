@@ -15,7 +15,6 @@ const TableOrders = ({ setDataToEdit, deleteData }) => {
     helpHttp()
       .get(url)
       .then((res) => {
-        console.log(res)
         if (!res.err) {
           setData(res);
           setError(null);
