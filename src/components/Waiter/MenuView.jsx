@@ -42,7 +42,7 @@ const MenuView = () => {
       products.push({...item, qty: 1});
       setProducts(products)
     }
-   
+   //hola mundo
     //si no existe, solo lo empuja al arreglo de newOrder
     newOrder.push(item);
     incrementQty();
