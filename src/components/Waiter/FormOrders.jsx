@@ -33,7 +33,7 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
     "userId": userId,
     "products":  newOrder,
     "status": 'Pending',
-    "dateEntry": Date.now()
+    "dateEntry": new Date()
     });
   };
 
