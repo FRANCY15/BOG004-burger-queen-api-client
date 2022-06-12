@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { userId } from "../Login/Login";
 import { newOrder } from './MenuView';
-
+import "../../assets/css/FormOrders.css"
 
 const initialForm = {
   "userId": userId,
@@ -56,9 +56,9 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
 
   let ordersclient = newOrder.map((entry) => (
     <tr key={entry.id}>
-      <td>{entry.name}</td>
-      <td>{entry.price}</td>
-      <td>{entry.type}</td>
+      <td>{entry.product.name}</td>
+      <td>{entry.product.price}</td>
+      <td>{entry.product.type}</td>
       <td>{entry.qty}</td>
       <td></td>
     </tr>
@@ -69,7 +69,7 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
     <div>
       <h3>{dataToEdit ? "Edit info Client" : "Client Information"}</h3>
      
-      <form onSubmit={handleSubmit}>
+      <form className="Form-order" onSubmit={handleSubmit}>
             <label htmlFor="client">Name Client</label>
             <input 
             type="text" 
@@ -86,7 +86,7 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
             value={form.userId}
             disabled
             />
-            <table>
+            <table className="Table-order">
               <thead>
                 <th>Product</th>
                 <th>Price</th>

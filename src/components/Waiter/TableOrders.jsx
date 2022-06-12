@@ -8,6 +8,7 @@ const TableOrders = ({ setDataToEdit, deleteData }) => {
 
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
+  console.log(data)
 
   let url = `${Api}/orders`;
 
@@ -37,12 +38,12 @@ const TableOrders = ({ setDataToEdit, deleteData }) => {
           </tr>
         </thead>
         <tbody>
-          {data.length === 0 ? (
+          {data?.length === 0 ? (
             <tr>
               <td colSpan="3">Not data</td>
             </tr>
           ) : (
-            data.map((el) => (
+            data?.map((el) => (
               <TableRowOrders
                 key={el.id}
                 el={el}

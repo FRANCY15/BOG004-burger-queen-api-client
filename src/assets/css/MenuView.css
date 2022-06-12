@@ -1,10 +1,25 @@
 .viewMenu{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    background-color: #FFFCAB;
+    display: flex;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    background-color: #fffcabc8;
     height: auto;
+    width: 90%;
     place-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
 }
+.viewMenu h3{
+    font-size:20px ;
+}
+
+.viewMenu h4{
+    font-size:15px ;
+}
+
 .optionsMenu{
     background-color: #FFC632;
     margin: 15px;
@@ -13,6 +28,7 @@
     border-radius: 10px;
     display: flex;
     justify-content: center;
+    text-align: center;
     
 }
 .btn-options{
@@ -20,10 +36,13 @@
     justify-content: center;
 }
 .btn-delete, .btn-add{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
     border-radius: 5px;
-    width: 35px;
-    height: 35px;
-    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
 }
 .bodyMenu{
     display: flex;

@@ -1,0 +1,23 @@
+.Form-order{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+    gap: 10px;
+    flex-direction: column;
+}
+.Table-order {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    color: #760c0c;
+    color-scheme: unset;
+    background-color: #ffc10742;
+    line-break: anywhere;
+    size: b5;
+    box-sizing: content-box;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}

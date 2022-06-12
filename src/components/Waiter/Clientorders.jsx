@@ -4,6 +4,7 @@ import React, { useState } from "react";
 const Clientorders = ({products}) => {
 
   const [orders, setOrders] = useState(products);
+  console.log(orders)
   let ordersclient = orders?.map((entry) => (
       
         <tr key={entry.id}>
