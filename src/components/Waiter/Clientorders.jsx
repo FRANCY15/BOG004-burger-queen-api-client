@@ -4,16 +4,16 @@ import React, { useState } from "react";
 const Clientorders = ({products}) => {
 
   const [orders, setOrders] = useState(products);
-  let ordersclient = orders?.map((entry) => (
-      
-        <tr key={entry.id}>
+  
+  let ordersclient = orders?.map((entry) => (          
+    <tr key={entry.id}>
             <td>{entry.product.name}</td>
             <td>{entry.qty}</td>
             <td>{entry.product.price}</td>
         </tr>
-        
   ));
 
+        
   return (
     <table className="table">
       <thead>

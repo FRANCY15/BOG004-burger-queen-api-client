@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FormOrders from "./FormOrders";
-import TableOrders from "./TableOrders";
+import CookView from "./CookView";
 
 const dataMenu = [
   {
@@ -139,7 +139,7 @@ const Orders = () => {
         dataToEdit={dataToEdit}
         setDataToEdit={setDataToEdit}
       />
-      <TableOrders
+      <CookView
         data={dbOrders}
         deleteData={deleteData}
         setDataToEdit={setDataToEdit}

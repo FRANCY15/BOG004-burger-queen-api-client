@@ -10,6 +10,10 @@ const MenuView = () => {
   const [products, setProducts] = useState([]);
   const [option, setOption] = useState('');
   const [typeMn, setTypeMn] = useState([]);  
+  const [order, setOrder] = useState([])
+  const {countqty , incrementQty, decrementQty} = useCouter(0); 
+  let [price, setPrice] = useState(0);
+  console.log(price)
 
   let menu = [];
 
@@ -19,61 +23,57 @@ const MenuView = () => {
       .then((res) => {
         if (!res.err) {
           res = res.map((item) => {
-            return {...item, qty: 0};
-          });
+            return {
+              "qty": 0,
+              "product":{
+                ...item          
+              }
+          }});
           setProducts(res);
+          // console.log(res)
         } else {
           setProducts(null);
         }
       });
   }, []);
 
-  const {countqty , incrementQty, decrementQty} = useCouter(); 
    
 
   const agregarProducto = (item) => {
-    // item.qty = item.qty + 1;
-    // primero buscar si el item ya existe en newOrder, entonces debe actualizar el que ya esta
-    // dentro de newOrder
-    if(products.find(({id})=> id === item.id)){
-      let findProduct = products.findIndex(({id})=> id === item.id);
-      products[findProduct].qty ++
+    if(order.find(({product})=> product.id === item.product.id)){
+      let findProduct = order.findIndex(({product})=> product.id === item.product.id);
+      order[findProduct].qty ++
     }else{
-      products.push({...item, qty: 1});
-      setProducts(products)
+      newOrder.push({...item, qty: 1});
+      setOrder(newOrder)
     }
-   //hola mundo
-    //si no existe, solo lo empuja al arreglo de newOrder
-    newOrder.push(item);
-    incrementQty();
+    setPrice(item.product.price * item.qty)
+    incrementQty()
     console.log(newOrder);
   };
 
   const borrarProducto = (item) => {
-    let delProduct = products.findIndex(({id})=> id === item.id);
-    if(products[delProduct].qty > 1){
-      products[delProduct].qty--;
-
+    let delProduct = order.findIndex(({product})=> product.id === item.product.id);
+    if(order[delProduct].qty > 1){
+      order[delProduct].qty --
     }else{
-      products.splice(delProduct, 1);
+      newOrder.splice(delProduct, 1);
     }
-    // newOrder.map((el) => {
-    //   if(el.id === item.id){
-    //     newOrder.splice(newOrder.indexOf(el), 1);
-    //     decrementQty();
-    //   }
-    // })
-      console.log(newOrder);
+    setPrice(price -= item.price)
+    decrementQty();
+    console.log(newOrder);
   }
 
   const elegirMenu = () => {
     if(option === 'Almuerzo'){
-        let resultado = products.filter((product) => product.type === "Almuerzo");
+        let resultado = products.filter(({product}) => product.type === "Almuerzo");
         setTypeMn(resultado)
+        console.log(resultado)
         
     }else if(option === 'Desayuno'){
-        let resultado = products.filter((product) => product.type === "Desayuno");
+        let resultado = products.filter(({product}) => product.type === "Desayuno");
         setTypeMn(resultado)
+        console.log(resultado)
     }
   }
 
@@ -92,12 +92,11 @@ const MenuView = () => {
         <hr />
       <div className="viewMenu">
         {typeMn.map((item) => (
-          <div className="optionsMenu" key={item.id}>
+          <div className="optionsMenu" key={item.product.id}>
             <div className="bodyMenu">
               
-              <h2>{item.name}</h2>
-              {/* <img src={item.image} alt="" /> */}
-              <h3>Price: $ {item.price}</h3>
+              <h3>{item.product.name}</h3>
+              <h4>Price: $ {item.product.price}</h4>
             
               <div className="btn-options">
                 <button

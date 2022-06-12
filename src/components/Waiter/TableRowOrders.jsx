@@ -1,10 +1,25 @@
 import React, { useState } from "react";
+import Api from "../../utils/Api";
+import { helpHttp } from "../helpers/helpHttp";
 import Clientorders from "./Clientorders";
 
 
 const TableRowOrders = ({ el}) => {
   let { client, products } = el;
-  const [statusOrder, setStatusOrder] = useState('Pending')
+
+  const [statusOrder, setStatusOrder] = useState('delivering')
+  let url = Api
+
+
+
+    helpHttp()
+    .patch(`${url}/orders/`+ products.id)
+    console.log(products.id)
+  //   {
+  //     "status": "delivered",
+  //     "dateProcessed": "2022-03-05 16:00"
+  // }
+  
   
   return (
     <>
@@ -19,8 +34,7 @@ const TableRowOrders = ({ el}) => {
             onChange={(e) => setStatusOrder(e.target.value)}
             value={statusOrder}
             >
-              <option defaultValue={statusOrder}>Elija una opción</option>
-              <option value="pending">Pending</option>
+              <option selected>{statusOrder}</option>
               <option value="delivered">Delivered</option>
             </select>
           </td>
