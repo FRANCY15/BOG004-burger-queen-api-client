@@ -6,11 +6,10 @@ import CookTableRowOrders from './CookTableRowOrders'
 
 import '../../assets/css/TableOrders.css'
 
-const CookView = ({ setDataToEdit, deleteData }) => {
+const CookView = () => {
 
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
-  console.log(data)
 
   let url = `${Api}/orders`;
 
@@ -27,6 +26,8 @@ const CookView = ({ setDataToEdit, deleteData }) => {
       });
   }, []);
 
+  let orderDelivering = data.filter(data => data.status === 'pending');
+
   return (
     <div>
       <Navbar/>
@@ -41,12 +42,12 @@ const CookView = ({ setDataToEdit, deleteData }) => {
             </tr>
           </thead>
           <tbody>
-            {data?.length === 0 ? (
+            {orderDelivering?.length === 0 ? (
               <tr>
                 <td colSpan="3">Not data</td>
               </tr>
             ) : (
-              data?.map((el) => ( el.status === 'delivered' ? ' ' : 
+              orderDelivering?.map((el) => ( el.status !== 'pending' ? ' ' : 
                 <CookTableRowOrders
                   key={el.id}
                   el={el}

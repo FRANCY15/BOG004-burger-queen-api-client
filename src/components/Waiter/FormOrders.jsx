@@ -12,30 +12,25 @@ const initialForm = {
   "dateEntry": ""
 };
 
-const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
+const FormOrders = ({createData}) => {
   const [form, setForm] = useState(initialForm);
-
-  useEffect(() => {
-    if (dataToEdit) {
-      setForm(dataToEdit);
-    } else {
-      setForm(initialForm);
-    }
-  }, [dataToEdit]);
-
-
+  // const [updateNewOrder, setUpdateNewOrder] = useState(false);
  
   const handleChange = (e) => {
     setForm({
-            // ...form,
+            "userId": userId,
+            "products":  newOrder,
+            "status": 'pending',
+            "dateEntry": new Date(),
       [e.target.name]: e.target.value,
-     
-    "userId": userId,
-    "products":  newOrder,
-    "status": 'pending',
-    "dateEntry": new Date()
-    });
+      });
+
   };
+  
+  const reset = () => {
+    let table = document.getElementsById('Table-dataOrder');
+    table.innerHTML = '';
+}
 
   const handleSubmit = (e) => {
    
@@ -44,16 +39,16 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
       alert("Datos incompletos");
       return;
     }
-    console.log("este es form.id", form.id);
     createData(form);
-    handleReset();
     window.confirm('Está seguro de enviar la orden?')
+    handleReset();
   };
 
-  const handleReset = (e) => {
+  const handleReset = () => {
     setForm(initialForm);
-    setDataToEdit(null);
+    reset()
   };
+ 
 
   let ordersclient = newOrder.map((entry) => (
     <tr key={entry.id}>
@@ -67,9 +62,7 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
   
 
   return (
-    <div>
-      <h3>{dataToEdit ? "Edit info Client" : "Client Information"}</h3>
-     
+    <div>     
       <form className="Form-order" onSubmit={handleSubmit} >
             <label htmlFor="client">Name Client</label>
             <input 
@@ -83,7 +76,6 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
             <input 
             type="text" 
             name="table"
-            onChange={handleChange}
             value={form.userId}
             disabled
             />
@@ -95,7 +87,7 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
                 <th>Quantity</th>
                 <th>Total</th>
               </thead>
-              <tbody>
+              <tbody id="Table-dataOrder">
                 {ordersclient}
               </tbody>
             </table>

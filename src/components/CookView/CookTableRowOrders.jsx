@@ -1,13 +1,20 @@
 import React, { useState } from "react";
+import Api from "../../utils/Api";
+import { helpHttp } from "../helpers/helpHttp";
 import Clientorders from "../Waiter/Clientorders";
 
 
 
 const CookTableRowOrders = ({ el}) => {
-  let { client, products } = el;
+  let { client, products, id } = el;
   const [statusOrder, setStatusOrder] = useState('Pending')
+  let url = `${Api}/orders/`+id;
 
-  //Petición PATCH
+
+const updateStatus = () => {
+  helpHttp()
+  .patch(url, )
+}
   
   return (
     <>

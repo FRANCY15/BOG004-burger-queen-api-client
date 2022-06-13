@@ -4,22 +4,13 @@ import { helpHttp } from "../helpers/helpHttp";
 import Clientorders from "./Clientorders";
 
 
-const TableRowOrders = ({ el}) => {
+const TableRowOrders = ({ el }) => {
   let { client, products } = el;
 
   const [statusOrder, setStatusOrder] = useState('delivering')
-  let url = Api
+  // let url = Api
 
-
-
-    helpHttp()
-    .patch(`${url}/orders/`+ products.id)
-    console.log(products.id)
-  //   {
-  //     "status": "delivered",
-  //     "dateProcessed": "2022-03-05 16:00"
-  // }
-  
+ 
   
   return (
     <>

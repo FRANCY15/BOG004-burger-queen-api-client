@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 
 const Clientorders = ({products}) => {
+  console.log(products)
 
   const [orders, setOrders] = useState(products);
   

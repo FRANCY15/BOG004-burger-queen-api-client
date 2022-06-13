@@ -2,20 +2,16 @@ import React, { useEffect, useState } from "react";
 import Api from "../../utils/Api";
 import { helpHttp } from "../helpers/helpHttp";
 import "../../assets/css/MenuView.css";
-import useCouter from "../counterHooks/useCouter";
 
 export const newOrder = [];
 
-const MenuView = () => {
+const MenuView = ({setLoad}) => {
   const [products, setProducts] = useState([]);
   const [option, setOption] = useState('');
   const [typeMn, setTypeMn] = useState([]);  
-  const [order, setOrder] = useState([])
-  const {countqty , incrementQty, decrementQty} = useCouter(0); 
+  const [order, setOrder] = useState([]);
   let [price, setPrice] = useState(0);
   console.log(price)
-
-  let menu = [];
 
   useEffect(() => {
     helpHttp()
@@ -30,25 +26,26 @@ const MenuView = () => {
               }
           }});
           setProducts(res);
-          // console.log(res)
         } else {
           setProducts(null);
         }
       });
   }, []);
 
-   
 
   const agregarProducto = (item) => {
     if(order.find(({product})=> product.id === item.product.id)){
       let findProduct = order.findIndex(({product})=> product.id === item.product.id);
       order[findProduct].qty ++
+      let findProd = typeMn.findIndex(({product})=> product.id === item.product.id);
+      typeMn[findProd].qty = newOrder[findProduct].qty
+      console.log('type', typeMn[findProd])
     }else{
       newOrder.push({...item, qty: 1});
       setOrder(newOrder)
     }
-    setPrice(item.product.price * item.qty)
-    incrementQty()
+    setLoad(true)
+    setPrice(price += item.product.price)
     console.log(newOrder);
   };
 
@@ -56,11 +53,12 @@ const MenuView = () => {
     let delProduct = order.findIndex(({product})=> product.id === item.product.id);
     if(order[delProduct].qty > 1){
       order[delProduct].qty --
+      let findProd = typeMn.findIndex(({product})=> product.id === item.product.id);
+      typeMn[findProd].qty = newOrder[delProduct].qty
     }else{
       newOrder.splice(delProduct, 1);
     }
-    setPrice(price -= item.price)
-    decrementQty();
+    setPrice(price -= item.product.price)
     console.log(newOrder);
   }
 
@@ -68,12 +66,9 @@ const MenuView = () => {
     if(option === 'Almuerzo'){
         let resultado = products.filter(({product}) => product.type === "Almuerzo");
         setTypeMn(resultado)
-        console.log(resultado)
-        
     }else if(option === 'Desayuno'){
         let resultado = products.filter(({product}) => product.type === "Desayuno");
         setTypeMn(resultado)
-        console.log(resultado)
     }
   }
 
@@ -97,7 +92,7 @@ const MenuView = () => {
               
               <h3>{item.product.name}</h3>
               <h4>Price: $ {item.product.price}</h4>
-            
+                          
               <div className="btn-options">
                 <button
                   className="btn-add"
@@ -107,8 +102,7 @@ const MenuView = () => {
                 >
                   +
                 </button>
-
-                <h3>{item.qty}</h3>
+                <h3> {item.qty} </h3>
 
                 <button
                   className="btn-delete"

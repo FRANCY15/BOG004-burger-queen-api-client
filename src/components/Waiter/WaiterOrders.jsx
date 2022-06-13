@@ -6,11 +6,10 @@ import TableRowOrders from '../Waiter/TableRowOrders'
 
 import '../../assets/css/TableOrders.css'
 
-const WaiterOrders = ({ setDataToEdit, deleteData }) => {
+const WaiterOrders = () => {
 
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
-  console.log(data)
 
   let url = `${Api}/orders`;
 
@@ -27,6 +26,10 @@ const WaiterOrders = ({ setDataToEdit, deleteData }) => {
       });
   }, []);
 
+  let orderDelivering = data.filter(data => data.status === 'delivering');
+  // console.log('DELIVERING',orderDelivering)
+
+
   return (
     <div>
       <Navbar/>
@@ -41,12 +44,12 @@ const WaiterOrders = ({ setDataToEdit, deleteData }) => {
             </tr>
           </thead>
           <tbody>
-            {data?.length === 0 ? (
+            {orderDelivering?.length === 0 ? (
               <tr>
                 <td colSpan="3">Not data</td>
               </tr>
             ) : (
-              data?.map((el) => ( el.status === 'delivered' ? ' ' : 
+              orderDelivering?.map((el) => ( el.status === 'delivered' ? ' ' : 
                 <TableRowOrders
                   key={el.id}
                   el={el}

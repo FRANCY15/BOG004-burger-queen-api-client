@@ -8,9 +8,10 @@ import Message from "../Loader/Message";
 
 const OrdersApi = () => {
   const [dbOrders, setdbOrders] = useState(null);
-  const [dataToEdit, setDataToEdit] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  // console.log('LOAD', load)
 
   let api = helpHttp();
   let url = `${Api}/orders`;
@@ -47,24 +48,6 @@ const OrdersApi = () => {
       });
   };
 
-  const updateData = (data) => {
-    let newData = dbOrders.map((el) => (el.id === data.id ? data : el));
-    setdbOrders(newData);
-  };
-
-  const deleteData = (id) => {
-    let isDelete = window.confirm(
-      `Are you sure you want to delete the record? idClient: '${id}'`
-    );
-
-    if (isDelete) {
-      let newData = dbOrders.filter((el) => el.id !== id);
-      setdbOrders(newData);
-    } else {
-      return;
-    }
-  };
-
   return (
     <div>
       
@@ -72,9 +55,6 @@ const OrdersApi = () => {
       
       <FormOrders
         createData={createData}
-        updateData={updateData}
-        dataToEdit={dataToEdit}
-        setDataToEdit={setDataToEdit}
       />
       {loading && <Loader />}
       {error && (
