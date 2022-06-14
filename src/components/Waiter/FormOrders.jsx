@@ -27,10 +27,6 @@ const FormOrders = ({createData}) => {
 
   };
   
-  const reset = () => {
-    let table = document.getElementsById('Table-dataOrder');
-    table.innerHTML = '';
-}
 
   const handleSubmit = (e) => {
    
@@ -46,7 +42,6 @@ const FormOrders = ({createData}) => {
 
   const handleReset = () => {
     setForm(initialForm);
-    reset()
   };
  
 
@@ -79,7 +74,7 @@ const FormOrders = ({createData}) => {
             value={form.userId}
             disabled
             />
-            <table className="Table-order">
+            <table className="Table-order" >
               <thead>
                 <th>Product</th>
                 <th>Price</th>
@@ -87,9 +82,9 @@ const FormOrders = ({createData}) => {
                 <th>Quantity</th>
                 <th>Total</th>
               </thead>
-              <tbody id="Table-dataOrder">
+              {form.client === '' ? '' : <tbody id="Table-dataOrder">
                 {ordersclient}
-              </tbody>
+              </tbody>}
             </table>
             <input type="submit" value="Register"
             onClick={handleSubmit}/>

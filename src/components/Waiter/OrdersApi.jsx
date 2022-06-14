@@ -33,13 +33,11 @@ const OrdersApi = () => {
   }, []);
 
   const createData = (data) => {
-    console.log("esto es data", data);
     api
       .post(url, {
         body: data
       })
       .then((res) => {
-        console.log("esto es res",res);
         if (!res.err) {
           setdbOrders([...dbOrders, res]);
         } else {
@@ -47,6 +45,7 @@ const OrdersApi = () => {
         }
       });
   };
+
 
   return (
     <div>

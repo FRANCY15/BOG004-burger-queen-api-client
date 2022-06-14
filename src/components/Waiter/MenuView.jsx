@@ -39,12 +39,11 @@ const MenuView = ({setLoad}) => {
       order[findProduct].qty ++
       let findProd = typeMn.findIndex(({product})=> product.id === item.product.id);
       typeMn[findProd].qty = newOrder[findProduct].qty
-      console.log('type', typeMn[findProd])
     }else{
       newOrder.push({...item, qty: 1});
       setOrder(newOrder)
     }
-    setLoad(true)
+    // setLoad(true)
     setPrice(price += item.product.price)
     console.log(newOrder);
   };
