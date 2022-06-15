@@ -1,6 +1,5 @@
-.viewMenu{
+.viewMenu {
     display: flex;
-    /* grid-template-columns: 1fr 1fr 1fr; */
     background-color: #fffcabc8;
     height: auto;
     width: 90%;
@@ -10,7 +9,12 @@
     align-content: center;
     justify-content: center;
     align-items: center;
-
+}
+.viewMenu h3{
+    font-size:20px ;
+}
+.viewMenu h4{
+    font-size:15px ;
 }
 .viewMenu h3{
     font-size:20px ;

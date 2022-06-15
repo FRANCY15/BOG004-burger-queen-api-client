@@ -18,7 +18,7 @@ const SelectorRol = () => {
           <img src={mesero} alt="LogoMesero" />
         </Link>
 
-        <Link to="/ListarPedidos" className="btn" id="Cocinero" >Cocinero
+        <Link to="/CookView" className="btn" id="Cocinero" >Cocinero
           <img src={cocinero} alt="LogoCocinero" />
         </Link>
         

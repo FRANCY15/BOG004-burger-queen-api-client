@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { userId } from "../Login/Login";
 import { newOrder } from './MenuView';
-import "../../assets/css/FormOrders.css"
+import '../../assets/css/FormOrders.css'
+
 
 const initialForm = {
   "userId": userId,
@@ -13,7 +14,6 @@ const initialForm = {
 
 const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
   const [form, setForm] = useState(initialForm);
-  const [statusOrder, setStatusOrder] = useState('')
 
   useEffect(() => {
     if (dataToEdit) {
@@ -32,7 +32,7 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
      
     "userId": userId,
     "products":  newOrder,
-    "status": 'Pending',
+    "status": 'pending',
     "dateEntry": new Date()
     });
   };
@@ -47,6 +47,7 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
     console.log("este es form.id", form.id);
     createData(form);
     handleReset();
+    window.confirm('Está seguro de enviar la orden?')
   };
 
   const handleReset = (e) => {
@@ -57,7 +58,7 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
   let ordersclient = newOrder.map((entry) => (
     <tr key={entry.id}>
       <td>{entry.product.name}</td>
-      <td>{entry.product.price}</td>
+      <td>${entry.product.price}</td>
       <td>{entry.product.type}</td>
       <td>{entry.qty}</td>
       <td></td>
@@ -69,7 +70,7 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
     <div>
       <h3>{dataToEdit ? "Edit info Client" : "Client Information"}</h3>
      
-      <form className="Form-order" onSubmit={handleSubmit}>
+      <form className="Form-order" onSubmit={handleSubmit} >
             <label htmlFor="client">Name Client</label>
             <input 
             type="text" 
@@ -78,6 +79,7 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
             onChange={handleChange}
             value={form.client}
             />
+            <button onChange={handleChange}>Ver orden</button>
             <label htmlFor="table">User id</label>
             <input 
             type="text" 

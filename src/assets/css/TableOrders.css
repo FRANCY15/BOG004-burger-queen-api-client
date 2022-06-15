@@ -1,12 +1,15 @@
-.Form-order{
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    align-items: stretch;
-    gap: 10px;
-    flex-direction: column;
+.styleCrudsOrders{
+    display: flex;     
+    height: 100vh;
+    width: 100%;
+    flex-direction: column;    
+    background-image: url('../img/fondoBurger.png');
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-size: contain;
+    font-family: 'Itim', cursive;
 }
+
 .Table-order {
     border-color: inherit;
     border-style: solid;

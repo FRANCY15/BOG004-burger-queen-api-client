@@ -15,7 +15,7 @@ const Navbar = () => {
     <nav className='Navbar'>
         <h3>Burger Queen</h3>
         <Link to="/PruebaCruds" className="Navbar-btn">New order</Link>
-        <Link to="/TableOrders" className="Navbar-btn">Mostrar Ordenes</Link>
+        <Link to="/WaiterOrders" className="Navbar-btn">Mostrar Ordenes</Link>
         <button className="Navbar-btn" onClick={() => {cerrar()}}>LogOut</button>
     </nav>
   )

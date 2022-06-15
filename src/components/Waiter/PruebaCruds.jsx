@@ -6,15 +6,15 @@ import "../../assets/css/pruebaCruds.css";
 
 const PruebaCruds = () => {
   return (
-          <>
-        <Navbar />
-    <div className="styleCruds">
-      <div className="contentCrud">
-        <MenuView />
-       
-        <OrdersApi />
+    <>
+      <Navbar />
+      <div className="styleCruds">
+        <div className="contentCrud">
+          <MenuView />
+        
+          <OrdersApi />
+        </div>
       </div>
-    </div>
     </>
   );
 };

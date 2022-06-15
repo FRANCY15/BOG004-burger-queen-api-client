@@ -12,6 +12,8 @@ const MenuView = () => {
   const [typeMn, setTypeMn] = useState([]);  
   const [order, setOrder] = useState([])
   const {countqty , incrementQty, decrementQty} = useCouter(0); 
+  let [price, setPrice] = useState(0);
+  
 
   let menu = [];
 
@@ -28,7 +30,7 @@ const MenuView = () => {
               }
           }});
           setProducts(res);
-          console.log(res)
+          // console.log(res)
         } else {
           setProducts(null);
         }
@@ -45,6 +47,7 @@ const MenuView = () => {
       newOrder.push({...item, qty: 1});
       setOrder(newOrder)
     }
+    setPrice(item.product.price * item.qty)
     incrementQty()
     console.log(newOrder);
   };
@@ -56,8 +59,9 @@ const MenuView = () => {
     }else{
       newOrder.splice(delProduct, 1);
     }
-        decrementQty();
-      console.log(newOrder);
+    setPrice(price -= item.price)
+    decrementQty();
+    console.log(newOrder);
   }
 
   const elegirMenu = () => {

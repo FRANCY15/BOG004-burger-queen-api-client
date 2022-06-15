@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const useCouter = (inicialqty = 0) => {
+export const useCouter = (inicialqty = 1) => {
     const [countqty, setCountqty] = useState(inicialqty)
    
     const incrementQty = () =>{

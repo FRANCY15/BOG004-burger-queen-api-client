@@ -6,7 +6,8 @@ import Login from "./components/Login/Login";
 import SelectorRol from "./components/SelectorRol/SelectorRol";
 import OrdersApi from "./components/Waiter/OrdersApi";
 import PruebaCruds from "./components/Waiter/PruebaCruds";
-import TableOrders from "./components/Waiter/TableOrders";
+import CookView from "./components/CookView/CookView";
+import WaiterOrders from "./components/Waiter/WaiterOrders";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,7 +18,8 @@ root.render(
       <Route path="/AdminColaborator" element={<AdminColaborator />} />
       <Route path="/PruebaCruds" element={<PruebaCruds />} />
       <Route path="/OrdersApi" element={<OrdersApi />} />
-      <Route path="/TableOrders" element={<TableOrders />} />
+      <Route path="/CookView" element={<CookView />} />
+      <Route path="/WaiterOrders" element={<WaiterOrders />} />
     </Routes>
   </BrowserRouter>
 );
