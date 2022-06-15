@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Api from "../../utils/Api";
 import { helpHttp } from "../helpers/helpHttp";
-import Navbar from "../shared/Navbar";
 import CookTableRowOrders from "./CookTableRowOrders";
-
 import "../../assets/css/TableOrders.css";
+import GenericNavbar from "../shared/GenericNavbar";
+
 
 const CookView = () => {
   const [orders, setOrders] = useState([]);
@@ -39,9 +39,9 @@ const CookView = () => {
 
   return (
     <div>
-      <Navbar />
+      <GenericNavbar />
       <div className="styleCrudsOrders">
-        <h3>This is your order</h3>
+        <h3>This is the order pending</h3>
         <table className="Table-order">
           <thead>
             <tr>

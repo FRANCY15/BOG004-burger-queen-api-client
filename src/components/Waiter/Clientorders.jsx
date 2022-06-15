@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
 
 const Clientorders = ({products}) => {
-  console.log(products)
 
-  const [orders, setOrders] = useState(products);
   
-  let ordersclient = orders?.map((entry) => (          
-    <tr key={entry.id}>
+  let ordersclient = products?.map((entry, index) => (          
+    <tr key={index}>
             <td>{entry.product.name}</td>
             <td>{entry.qty}</td>
             <td>{entry.product.price}</td>
-        </tr>
+    </tr>
   ));
 
         
@@ -22,7 +20,6 @@ const Clientorders = ({products}) => {
           <th scope="col">Product</th>
           <th scope="col">Qty</th>
           <th scope="col">Price</th>
-          
         </tr>
       </thead>
       <tbody>{ordersclient}</tbody>

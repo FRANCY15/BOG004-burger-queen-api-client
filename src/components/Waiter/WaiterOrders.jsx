@@ -42,7 +42,7 @@ const WaiterOrders = () => {
     <div>
       <Navbar/>
       <div className="styleCrudsOrders">
-        <h3>This is your order...</h3>
+        <h3 className="Title">This is your order...</h3>
         <table className="Table-order">
           <thead>
             <tr>

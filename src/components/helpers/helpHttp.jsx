@@ -1,6 +1,3 @@
-//pequeña minilibreria, helper
-//opciones que recibe la peticion Fetch
-// HACER PETICIONES A LOS DIFERENTES VERBOS HTTP
 import {userToken} from '../Login/Login'
 
 let tokenhelper = userToken
@@ -23,8 +20,6 @@ export const helpHttp = () => {
     options.body = JSON.stringify(options.body) || false;
     if (!options.body) delete options.body;
 
-    
-    // console.log(options);
     setTimeout(() => controller.abort(), 5000);
     return fetch(endpoint, options)
       .then((res) =>

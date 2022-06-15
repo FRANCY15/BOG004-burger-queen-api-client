@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader";
 import Message from "../Loader/Message";
 
 
-const OrdersApi = () => {
+const OrdersApi = ({price, setPrice, order, setOrder}) => {
   const [dbOrders, setdbOrders] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -50,10 +50,14 @@ const OrdersApi = () => {
   return (
     <div>
       
-      <h2>Orders Api</h2>
+      <h2>Make your Order</h2>
       
       <FormOrders
         createData={createData}
+        price={price}
+        setPrice={setPrice}
+        order={order}
+        setOrder={setOrder}
       />
       {loading && <Loader />}
       {error && (

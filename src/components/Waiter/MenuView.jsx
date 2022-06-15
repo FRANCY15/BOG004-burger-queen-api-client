@@ -5,14 +5,12 @@ import "../../assets/css/MenuView.css";
 
 export const newOrder = [];
 
-const MenuView = ({setLoad}) => {
+const MenuView = ({order, setOrder, price, setPrice}) => {
   const [products, setProducts] = useState([]);
   const [option, setOption] = useState('');
   const [typeMn, setTypeMn] = useState([]);  
-  const [order, setOrder] = useState([]);
-  let [price, setPrice] = useState(0);
-  console.log(price)
 
+  
   useEffect(() => {
     helpHttp()
       .get(`${Api}/products`)
@@ -23,42 +21,56 @@ const MenuView = ({setLoad}) => {
               "qty": 0,
               "product":{
                 ...item          
-              }
-          }});
-          setProducts(res);
-        } else {
-          setProducts(null);
-        }
-      });
-  }, []);
-
-
-  const agregarProducto = (item) => {
+              },
+            }});
+            setProducts(res);
+          } else {
+            setProducts(null);
+          }
+        });
+      }, []);
+      
+      
+  const agregarProducto = (item) => {  
     if(order.find(({product})=> product.id === item.product.id)){
-      let findProduct = order.findIndex(({product})=> product.id === item.product.id);
-      order[findProduct].qty ++
-      let findProd = typeMn.findIndex(({product})=> product.id === item.product.id);
-      typeMn[findProd].qty = newOrder[findProduct].qty
+      console.log('PRODUCTOS EXISTENTES', item.product.id)
+      let findProductIndex = typeMn.findIndex(({product})=> product.id === item.product.id);
+      let orderIndex = order.findIndex(({product})=> product.id === item.product.id);
+      typeMn[findProductIndex].qty = order[orderIndex].qty+1
+      const newOrder3 = order.map((element) => {
+        console.log('IDS',element.product.id, item.product.id);
+        if(element.product.id === item.product.id){
+          return {
+            "qty": element.qty+1,
+            "product":{
+              ...element.product,
+              "price": (element.qty+1) * element.product.price
+            }
+          }
+        }else{
+          return element
+        }
+      })
+      setOrder([...newOrder3])
     }else{
-      newOrder.push({...item, qty: 1});
-      setOrder(newOrder)
+      setOrder([...order, {...item, qty: 1}])
     }
-    // setLoad(true)
     setPrice(price += item.product.price)
-    console.log(newOrder);
+    console.log(price);
   };
+  console.log('ORDER',order)
 
   const borrarProducto = (item) => {
     let delProduct = order.findIndex(({product})=> product.id === item.product.id);
     if(order[delProduct].qty > 1){
       order[delProduct].qty --
       let findProd = typeMn.findIndex(({product})=> product.id === item.product.id);
-      typeMn[findProd].qty = newOrder[delProduct].qty
+      typeMn[findProd].qty = order[delProduct].qty
     }else{
-      newOrder.splice(delProduct, 1);
+      order.splice(delProduct, 1);
     }
     setPrice(price -= item.product.price)
-    console.log(newOrder);
+    console.log(price);
   }
 
   const elegirMenu = () => {
@@ -73,14 +85,14 @@ const MenuView = ({setLoad}) => {
 
   return (
     <>
-        <label htmlFor="SelectMenu">Seleccionar Menu</label>
+        <label htmlFor="SelectMenu">Select Menu</label>
         <select onChange={(e) => setOption(e.target.value)} onClick={()=>{elegirMenu()}} name="opciones">
-          <option defaultValue={setOption}>Elija una opción</option>
+          <option defaultValue={setOption}>Select a option</option>
           <option key="Alm" value="Almuerzo">
-            Almuerzo
+            Luch
           </option>
           <option key="Des" value="Desayuno">
-            Desayuno
+            Breakfast
           </option>
         </select>
         <hr />
@@ -101,8 +113,7 @@ const MenuView = ({setLoad}) => {
                 >
                   +
                 </button>
-                <h3> {item.qty} </h3>
-
+                <h3> {order.length? item.qty : 0} </h3>
                 <button
                   className="btn-delete"
                   onClick={() => {

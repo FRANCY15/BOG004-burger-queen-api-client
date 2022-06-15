@@ -31,9 +31,7 @@ const TableRowOrders = ({ el, updateOrders }) => {
           <Clientorders products={products} />
         </td>
         <td>
-          <td>
             <button onClick={updateStatus}>Delivered</button>
-          </td>
         </td>
       </tr>
     </>
