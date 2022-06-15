@@ -24,7 +24,6 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
   }, [dataToEdit]);
 
 
- 
   const handleChange = (e) => {
     setForm({
             // ...form,
@@ -78,8 +77,8 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
             placeholder='Name Client' 
             onChange={handleChange}
             value={form.client}
-            />
-            <button onChange={handleChange}>Ver orden</button>
+            /><button onChange={handleChange}>Ver orden</button>
+            
             <label htmlFor="table">User id</label>
             <input 
             type="text" 
