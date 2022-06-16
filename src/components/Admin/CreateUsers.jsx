@@ -5,9 +5,9 @@ import { FormGroup, Label, Input } from 'reactstrap'
 
 
 const intialForm = {
-    user: '',
+    email: '',
     password: '',
-    rol: {
+    roles: {
         admin:false
     }
 }
@@ -21,7 +21,7 @@ const [rol, setRol] = useState({admin:false});
 
 useEffect(() => {
     if(editColaborator){
-        setForm(setEditColaborator)
+        setForm(editColaborator)
     }else{
         setForm(intialForm)
     }
@@ -34,12 +34,9 @@ const handleSubmit = (e) => {
         alert('Incomplete data!')
         return
     }
-    form.user = email;
+    form.email = email;
     form.password = password;
-    form.rol = {admin:rol};
-
-    setForm(form)
-    console.log(form)
+    form.roles = {admin:rol};
     
     createData(form)
     alert('Successful registration!')
@@ -47,8 +44,9 @@ const handleSubmit = (e) => {
 }
 
 
-const handleReset = (e) => {
-    setForm(intialForm)
+const handleReset = () => {
+    setEmail('')
+    setPassword('')
     setEditColaborator(null)
 }
 
@@ -61,7 +59,8 @@ const handleReset = (e) => {
             <input 
             type="email" 
             name="user" 
-            placeholder='User Name'  
+            placeholder='User Name'
+            value={email}
             onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -71,6 +70,7 @@ const handleReset = (e) => {
             type="password" 
             name="password" 
             placeholder='Password' 
+            value={password}
             onChange={(e) => {
                 setPassword(e.target.value);
               }}
@@ -97,7 +97,7 @@ const handleReset = (e) => {
                  <Label>Is Admin</Label>
             </FormGroup>
             <input type="submit" value='Create' onClick={handleSubmit}/>
-            <input type="reset" value='Clear'onClick={handleReset}/>
+            <input type="reset" value='Clear' onClick={handleReset}/>
         </form>
     </>
   )
