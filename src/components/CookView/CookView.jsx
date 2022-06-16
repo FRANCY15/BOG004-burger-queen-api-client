@@ -41,7 +41,7 @@ const CookView = () => {
     <div>
       <GenericNavbar />
       <div className="styleCrudsOrders">
-        <h3>This is the order pending</h3>
+        <h3 className="Title">This is the order pending</h3>
         <table className="Table-order">
           <thead>
             <tr>

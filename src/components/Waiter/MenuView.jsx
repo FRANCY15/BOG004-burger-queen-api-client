@@ -3,7 +3,7 @@ import Api from "../../utils/Api";
 import { helpHttp } from "../helpers/helpHttp";
 import "../../assets/css/MenuView.css";
 
-export const newOrder = [];
+// export const newOrder = [];
 
 const MenuView = ({order, setOrder, price, setPrice}) => {
   const [products, setProducts] = useState([]);
@@ -33,7 +33,6 @@ const MenuView = ({order, setOrder, price, setPrice}) => {
       
   const agregarProducto = (item) => {  
     if(order.find(({product})=> product.id === item.product.id)){
-      console.log('PRODUCTOS EXISTENTES', item.product.id)
       let findProductIndex = typeMn.findIndex(({product})=> product.id === item.product.id);
       let orderIndex = order.findIndex(({product})=> product.id === item.product.id);
       typeMn[findProductIndex].qty = order[orderIndex].qty+1
@@ -44,7 +43,7 @@ const MenuView = ({order, setOrder, price, setPrice}) => {
             "qty": element.qty+1,
             "product":{
               ...element.product,
-              "price": (element.qty+1) * element.product.price
+              "price": (element.qty+1) * item.product.price
             }
           }
         }else{
@@ -56,21 +55,20 @@ const MenuView = ({order, setOrder, price, setPrice}) => {
       setOrder([...order, {...item, qty: 1}])
     }
     setPrice(price += item.product.price)
-    console.log(price);
   };
-  console.log('ORDER',order)
 
   const borrarProducto = (item) => {
     let delProduct = order.findIndex(({product})=> product.id === item.product.id);
     if(order[delProduct].qty > 1){
       order[delProduct].qty --
+      // price -= item.product.price
+      // console.log('ORDER PRICE', price)
       let findProd = typeMn.findIndex(({product})=> product.id === item.product.id);
       typeMn[findProd].qty = order[delProduct].qty
     }else{
       order.splice(delProduct, 1);
     }
     setPrice(price -= item.product.price)
-    console.log(price);
   }
 
   const elegirMenu = () => {

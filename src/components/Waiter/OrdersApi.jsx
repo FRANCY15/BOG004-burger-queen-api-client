@@ -11,8 +11,6 @@ const OrdersApi = ({price, setPrice, order, setOrder}) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // console.log('LOAD', load)
-
   let api = helpHttp();
   let url = `${Api}/orders`;
 
@@ -45,7 +43,6 @@ const OrdersApi = ({price, setPrice, order, setOrder}) => {
         }
       });
   };
-
 
   return (
     <div>
