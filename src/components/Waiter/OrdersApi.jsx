@@ -6,11 +6,12 @@ import Loader from "../Loader/Loader";
 import Message from "../Loader/Message";
 
 
-const OrdersApi = () => {
+const OrdersApi = ({price, setPrice, order, setOrder}) => {
   const [dbOrders, setdbOrders] = useState(null);
-  const [dataToEdit, setDataToEdit] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  // console.log('LOAD', load)
 
   let api = helpHttp();
   let url = `${Api}/orders`;
@@ -32,13 +33,11 @@ const OrdersApi = () => {
   }, []);
 
   const createData = (data) => {
-    console.log("esto es data", data);
     api
       .post(url, {
         body: data
       })
       .then((res) => {
-        console.log("esto es res",res);
         if (!res.err) {
           setdbOrders([...dbOrders, res]);
         } else {
@@ -47,34 +46,18 @@ const OrdersApi = () => {
       });
   };
 
-  const updateData = (data) => {
-    let newData = dbOrders.map((el) => (el.id === data.id ? data : el));
-    setdbOrders(newData);
-  };
-
-  const deleteData = (id) => {
-    let isDelete = window.confirm(
-      `Are you sure you want to delete the record? idClient: '${id}'`
-    );
-
-    if (isDelete) {
-      let newData = dbOrders.filter((el) => el.id !== id);
-      setdbOrders(newData);
-    } else {
-      return;
-    }
-  };
 
   return (
     <div>
       
-      <h2>Orders Api</h2>
+      <h2>Make your Order</h2>
       
       <FormOrders
         createData={createData}
-        updateData={updateData}
-        dataToEdit={dataToEdit}
-        setDataToEdit={setDataToEdit}
+        price={price}
+        setPrice={setPrice}
+        order={order}
+        setOrder={setOrder}
       />
       {loading && <Loader />}
       {error && (

@@ -6,11 +6,10 @@ import TableRowOrders from '../Waiter/TableRowOrders'
 
 import '../../assets/css/TableOrders.css'
 
-const WaiterOrders = ({ setDataToEdit, deleteData }) => {
+const WaiterOrders = () => {
 
-  const [data, setData] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
-  console.log(data)
 
   let url = `${Api}/orders`;
 
@@ -19,7 +18,7 @@ const WaiterOrders = ({ setDataToEdit, deleteData }) => {
       .get(url)
       .then((res) => {
         if (!res.err) {
-          setData(res);
+          setOrders(res.filter((element) => element.status === "delivering"));;
           setError(null);
         } else {
           setError(res);
@@ -27,11 +26,23 @@ const WaiterOrders = ({ setDataToEdit, deleteData }) => {
       });
   }, []);
 
+  const updateOrders = () => {
+    helpHttp()
+      .get(url)
+      .then((res) => {
+        if (!res.err) {
+          setOrders(res.filter((element) => element.status === "delivering"));
+        } else {
+          setError(res);
+        }
+      });
+  };
+
   return (
     <div>
       <Navbar/>
       <div className="styleCrudsOrders">
-        <h3>Esta es tu Orden</h3>
+        <h3 className="Title">This is your order...</h3>
         <table className="Table-order">
           <thead>
             <tr>
@@ -41,15 +52,16 @@ const WaiterOrders = ({ setDataToEdit, deleteData }) => {
             </tr>
           </thead>
           <tbody>
-            {data?.length === 0 ? (
+            {orders.length === 0 ? (
               <tr>
                 <td colSpan="3">Not data</td>
               </tr>
             ) : (
-              data?.map((el) => ( el.status === 'delivered' ? ' ' : 
+              orders.map((element) => (  
                 <TableRowOrders
-                  key={el.id}
-                  el={el}
+                  key={element.id}
+                  el={element}
+                  updateOrders={updateOrders}
                 />
               ))
             )}

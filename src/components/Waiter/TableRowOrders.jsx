@@ -1,44 +1,39 @@
 import React, { useState } from "react";
 import Api from "../../utils/Api";
 import { helpHttp } from "../helpers/helpHttp";
+import { userToken } from "../Login/Login";
 import Clientorders from "./Clientorders";
 
+const TableRowOrders = ({ el, updateOrders }) => {
+  let { client, products, id } = el;
+  const [statusOrder, setStatusOrder] = useState({});
 
-const TableRowOrders = ({ el}) => {
-  let { client, products } = el;
-
-  const [statusOrder, setStatusOrder] = useState('delivering')
-  let url = Api
-
-
-
+  const updateStatus = () => {
+    let url = `${Api}/orders/${id}`;
+    const data = {
+      status: "delivered",
+      dateProcessed: new Date(),
+    };
     helpHttp()
-    .patch(`${url}/orders/`+ products.id)
-    console.log(products.id)
-  //   {
-  //     "status": "delivered",
-  //     "dateProcessed": "2022-03-05 16:00"
-  // }
-  
-  
+    .patch(url, {body:data})
+      .then((resp) => {
+        setStatusOrder(resp);
+        updateOrders();
+      });
+    console.log(statusOrder);
+  };
+
   return (
     <>
-    <tr>
-      <td>{client}</td>
-      <td><Clientorders products={products}/></td>
-      <td>
-          <label htmlFor="status">Order Status</label>
-            <select
-            type="text" 
-            name="status"
-            onChange={(e) => setStatusOrder(e.target.value)}
-            value={statusOrder}
-            >
-              <option selected>{statusOrder}</option>
-              <option value="delivered">Delivered</option>
-            </select>
-          </td>
-    </tr>
+      <tr>
+        <td>{client}</td>
+        <td>
+          <Clientorders products={products} />
+        </td>
+        <td>
+            <button onClick={updateStatus}>Delivered</button>
+        </td>
+      </tr>
     </>
   );
 };

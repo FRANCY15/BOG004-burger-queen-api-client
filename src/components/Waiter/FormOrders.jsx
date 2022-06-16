@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { userId } from "../Login/Login";
-import { newOrder } from './MenuView';
-import '../../assets/css/FormOrders.css'
-
+import "../../assets/css/FormOrders.css";
 
 const initialForm = {
-  "userId": userId,
-  "client": "",
-  "products": [],
-  "status": "",
-  "dateEntry": ""
+  userId: userId,
+  client: "",
+  products: [],
+  status: "",
+  dateEntry: "",
 };
 
-const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
+const FormOrders = ({ createData, order, price, setPrice, setOrder }) => {
   const [form, setForm] = useState(initialForm);
+<<<<<<< HEAD
 
   useEffect(() => {
     if (dataToEdit) {
@@ -35,38 +34,42 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
     "dateEntry": new Date()
     });
   };
+=======
+  let [nameClient, setNameClient] = useState(null);
+>>>>>>> 0061a060bc916e2354bcee3b04f823c2c4c18dad
 
   const handleSubmit = (e) => {
-   
     e.preventDefault();
     if (!form) {
-      alert("Datos incompletos");
+      alert("Incomplete data!");
       return;
     }
-    console.log("este es form.id", form.id);
+
+      form.userId = userId;
+      form.products = order;
+      form.status = "pending";
+      form.dateEntry = new Date();
+      form.client = nameClient;
+
+    setForm(form);
+
+    console.log(form);
     createData(form);
+    window.confirm("Está seguro de enviar la orden?");
     handleReset();
-    window.confirm('Está seguro de enviar la orden?')
+
   };
 
-  const handleReset = (e) => {
+  const handleReset = () => {
     setForm(initialForm);
-    setDataToEdit(null);
+    setOrder([]);
+    setPrice(0);
+    setNameClient(null)
   };
-
-  let ordersclient = newOrder.map((entry) => (
-    <tr key={entry.id}>
-      <td>{entry.product.name}</td>
-      <td>${entry.product.price}</td>
-      <td>{entry.product.type}</td>
-      <td>{entry.qty}</td>
-      <td></td>
-    </tr>
-));
-  
 
   return (
     <div>
+<<<<<<< HEAD
       <h3>{dataToEdit ? "Edit info Client" : "Client Information"}</h3>
      
       <form className="Form-order" onSubmit={handleSubmit} >
@@ -88,22 +91,52 @@ const FormOrders = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
             disabled
             />
             <table className="Table-order">
+=======
+      <form className="Form-order" onSubmit={handleSubmit}>
+        <label htmlFor="client">Name Client</label>
+        <input
+          type="text"
+          name="client"
+          placeholder="Name Client"
+          onChange={(e) => {
+            setNameClient(e.target.value);
+          }}
+        />
+        <label htmlFor="table">User id</label>
+        <input type="text" name="table" value={form.userId} disabled />
+        <table className="Table-order">
+>>>>>>> 0061a060bc916e2354bcee3b04f823c2c4c18dad
               <thead>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Type</th>
-                <th>Quantity</th>
-                <th>Total</th>
+                <tr>
+                  <th>Product</th>
+                  <th>Type</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </tr>
               </thead>
-              <tbody>
-                {ordersclient}
+          {order.map((entry, index) => (
+            <Fragment key={index}>
+              <tbody id="Table-dataOrder">
+                <tr>
+                  {console.log("PRICE", entry.product.price, index)}
+                  <td>{entry.product.name}</td>
+                  <td>{entry.product.type}</td>
+                  <td>{entry.qty}</td>
+                  <td>${entry.product.price}</td>
+                </tr>
               </tbody>
-            </table>
-            <input type="submit" value="Register"
-            onClick={handleSubmit}/>
-            <input type="reset" value="Clear"
-            onClick={handleReset}/>
-        </form>
+            </Fragment>
+          ))}
+              <tfoot>
+                <tr>
+                  <th>Total Price</th>
+                  <td colSpan={3}>{price}</td>
+                </tr>
+              </tfoot>
+        </table>
+        <input type="submit" value="Register" onClick={handleSubmit} />
+        <input type="reset" value="Clear" onClick={handleReset} />
+      </form>
     </div>
   );
 };

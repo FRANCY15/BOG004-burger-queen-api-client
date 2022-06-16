@@ -1,16 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Api from "../../utils/Api";
 import { helpHttp } from "../helpers/helpHttp";
-import Navbar from "../shared/Navbar";
-import CookTableRowOrders from './CookTableRowOrders'
+import CookTableRowOrders from "./CookTableRowOrders";
+import "../../assets/css/TableOrders.css";
+import GenericNavbar from "../shared/GenericNavbar";
 
-import '../../assets/css/TableOrders.css'
 
-const CookView = ({ setDataToEdit, deleteData }) => {
-
-  const [data, setData] = useState([]);
+const CookView = () => {
+  const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
-  console.log(data)
 
   let url = `${Api}/orders`;
 
@@ -19,7 +17,7 @@ const CookView = ({ setDataToEdit, deleteData }) => {
       .get(url)
       .then((res) => {
         if (!res.err) {
-          setData(res);
+          setOrders(res.filter((element) => element.status === "pending"));
           setError(null);
         } else {
           setError(res);
@@ -27,11 +25,23 @@ const CookView = ({ setDataToEdit, deleteData }) => {
       });
   }, []);
 
+  const updateOrders = () => {
+    helpHttp()
+      .get(url)
+      .then((res) => {
+        if (!res.err) {
+          setOrders(res.filter((element) => element.status === "pending"));
+        } else {
+          setError(res);
+        }
+      });
+  };
+
   return (
     <div>
-      <Navbar/>
+      <GenericNavbar />
       <div className="styleCrudsOrders">
-        <h3>Esta es tu Orden</h3>
+        <h3>This is the order pending</h3>
         <table className="Table-order">
           <thead>
             <tr>
@@ -41,15 +51,16 @@ const CookView = ({ setDataToEdit, deleteData }) => {
             </tr>
           </thead>
           <tbody>
-            {data?.length === 0 ? (
+            {orders.length === 0 ? (
               <tr>
                 <td colSpan="3">Not data</td>
               </tr>
             ) : (
-              data?.map((el) => ( el.status === 'delivered' ? ' ' : 
+              orders.map((element) => (
                 <CookTableRowOrders
-                  key={el.id}
-                  el={el}
+                  key={element.id}
+                  el={element}
+                  updateOrders={updateOrders}
                 />
               ))
             )}
