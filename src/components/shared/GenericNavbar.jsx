@@ -12,8 +12,7 @@ const GenericNavbar = () => {
     return (
       <nav className='Navbar'>
           <h3>Burger Queen</h3>
-          <Link to="/AdminColaborator" className="Navbar-btn">Manage colaborators</Link>
-          <Link to="/ManageOptions" className="Navbar-btn">Manage Products</Link>
+          <Link to="/ManageOptions" className="Navbar-btn">Manage Options</Link>
           <button className="Navbar-btn" onClick={() => {cerrar()}}>LogOut</button>
       </nav>
     )

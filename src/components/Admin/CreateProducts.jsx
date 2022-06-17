@@ -93,11 +93,11 @@ const CreateProducts = ({createProducts, updateProducts, editProduct, setEditPro
             <input 
             type="submit" 
             value={editProduct ? 'Edit Product' : 'Register Product'}
-            onSubmit={handleSubmit} />
+            onClick={handleSubmit} />
             <input 
             type="reset" 
             value='Clear'
-            onSubmit={handleReset} />
+            onClick={handleReset} />
         </form>
     </>
   )

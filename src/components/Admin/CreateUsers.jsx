@@ -108,7 +108,7 @@ const handleReset = () => {
                  />
                  <Label>Is Admin</Label>
             </FormGroup>
-            <input type="submit" value='Create' onClick={handleSubmit}/>
+            <input type="submit" value={editColaborator ? 'Edit Users' : 'Create User'} onClick={handleSubmit}/>
             <input type="reset" value='Clear' onClick={handleReset}/>
         </form>
     </>
