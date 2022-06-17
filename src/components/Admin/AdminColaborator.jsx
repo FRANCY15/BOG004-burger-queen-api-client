@@ -48,9 +48,9 @@ const AdminColaborator = () => {
   };
 
   const updateData = (data) => {
-    let urlModify = `${Api}/users/${data.id}`
+    let urlUpdate = `${Api}/users/${data.id}`
     helpHttp()
-      .patch(urlModify, {
+      .patch(urlUpdate, {
         body: data,
       })
       .then((res) => {
@@ -66,7 +66,7 @@ const AdminColaborator = () => {
   };
 
   const deleteData = (id) => {
-    let isDelete = window.confirm(`¿Estás seguro de eliminar el registro con el id '${id}'`)
+    let isDelete = window.confirm(`¿Estás seguro de eliminar el registro con el id '${id}'?`)
    
     if(isDelete){
       let endPoint =`${Api}/users/${id}`
@@ -94,7 +94,7 @@ const AdminColaborator = () => {
         <CreateUsers
           createData={createData}
           updateData={updateData}
-          editColaborator={editColaborator} //data to edit
+          editColaborator={editColaborator} 
           setEditColaborator={setEditColaborator}
         />
         {loading && <Loader />}

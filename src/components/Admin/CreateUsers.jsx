@@ -70,7 +70,7 @@ const handleReset = () => {
 
   return (
     <>
-        <h3 className='Title'>Create Users</h3>
+        <h3 className='Title'>{editColaborator ? 'Edit Users' : 'Create User'}</h3>
         <form className='Form-order' onSubmit={handleSubmit}>
             <label htmlFor="user">User Name: </label>
             <input 

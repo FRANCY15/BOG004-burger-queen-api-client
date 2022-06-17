@@ -17,7 +17,7 @@ const ManageOptions = () => {
                 <img src={colaborators} alt="Colaborators" />
             </Link>
 
-            <Link to='/ManageOptions' className='btn'>Admin Products
+            <Link to='/AdminProducts' className='btn'>Admin Products
                 <img src={products} alt="Products" />
             </Link>
         </section>
