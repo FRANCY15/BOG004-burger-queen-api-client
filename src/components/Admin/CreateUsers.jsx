@@ -16,17 +16,30 @@ const CreateUsers = ({createData, updateData, editColaborator, setEditColaborato
 
 const [form, setForm] = useState(intialForm);
 const [email, setEmail] = useState('')
-const [password, setPassword] = useState('');
-const [rol, setRol] = useState({admin:false});
+const [password, setPassword] = useState('')
 
 useEffect(() => {
-    if(editColaborator){
-        setForm(editColaborator)
-    }else{
-        setForm(intialForm)
-    }
+   if(editColaborator){
+       setForm(editColaborator);
+       setEmail(editColaborator.email)
+       setPassword(editColaborator.password)
+   }else{
+    setForm(intialForm)
+   }
 }, [editColaborator])
 
+
+const handleChange = (e) => {
+    setForm({
+        ...form,
+        email: email,
+        password: password,
+        roles: {
+            admin: e.target.value
+        },
+    })
+    
+}
 
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,17 +47,21 @@ const handleSubmit = (e) => {
         alert('Incomplete data!')
         return
     }
-    form.email = email;
-    form.password = password;
-    form.roles = {admin:rol};
-    
-    createData(form)
-    alert('Successful registration!')
-    handleReset()
+
+    if(!form.id){
+        createData(form)
+        alert('Successful registration!')
+        handleReset()
+    }else{
+        updateData(form)
+        handleReset()
+        alert('User successfully updated!')
+    }
 }
 
 
 const handleReset = () => {
+    setForm(intialForm)
     setEmail('')
     setPassword('')
     setEditColaborator(null)
@@ -58,41 +75,36 @@ const handleReset = () => {
             <label htmlFor="user">User Name: </label>
             <input 
             type="email" 
-            name="user" 
+            name="email" 
             placeholder='User Name'
+            onChange={(e) => {setEmail(e.target.value)}}
             value={email}
-            onChange={(e) => {
-                setEmail(e.target.value);
-              }}
             />
             <label htmlFor="password"></label>
             <input 
             type="password" 
             name="password" 
             placeholder='Password' 
+            onChange={(e) => {setPassword(e.target.value)}}
             value={password}
-            onChange={(e) => {
-                setPassword(e.target.value);
-              }}
             />
             <FormGroup>
                 <Input 
                 id='rol2'
-                type="radio" 
+                type="radio"
+                name='roles' 
                 value= {false}
-                checked={rol === false ? true : false}
-                onChange={(e) => {
-                    setRol(e.target.value && false);
-                  }}/>
+                onChange={(e) => {handleChange(e)}}
+                checked={form.roles.admin === false ? true : false}
+                  />
                 <Label htmlFor="rol2">Not is Admin</Label>
                 <Input
                  id='rol1'
                  type="radio" 
+                 name='roles' 
                  value= {true}
-                 checked={rol === true ? true : false}
-                 onChange={(e) => {
-                    setRol(e.target.value && true);
-                  }}
+                 onChange={(e) => {handleChange(e)}}
+                 checked={form.roles.admin === true ? true : false}
                  />
                  <Label>Is Admin</Label>
             </FormGroup>

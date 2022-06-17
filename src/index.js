@@ -9,6 +9,7 @@ import PruebaCruds from "./components/Waiter/PruebaCruds";
 import CookView from "./components/CookView/CookView";
 import WaiterOrders from "./components/Waiter/WaiterOrders";
 import PrivateRoute from "./router/PrivateRoute";
+import ManageOptions from "./components/Admin/ManageOptions";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -44,6 +45,11 @@ root.render(
       <Route path="/AdminColaborator" element={
         <PrivateRoute>
           <AdminColaborator />
+        </PrivateRoute>
+      } />
+       <Route path="/ManageOptions" element={
+        <PrivateRoute>
+          <ManageOptions />
         </PrivateRoute>
       } />
     </Routes>

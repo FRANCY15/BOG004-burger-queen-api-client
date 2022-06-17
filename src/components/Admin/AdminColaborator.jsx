@@ -31,7 +31,7 @@ const AdminColaborator = () => {
         setLoading(false);
       })
       .catch(console.error);
-  }, [setColaborators]);
+  }, [url]);
 
   const createData = (data) => {
     helpHttp()
@@ -48,8 +48,9 @@ const AdminColaborator = () => {
   };
 
   const updateData = (data) => {
+    let urlModify = `${Api}/users/${data.id}`
     helpHttp()
-      .patch(url, {
+      .patch(urlModify, {
         body: data,
       })
       .then((res) => {
@@ -57,14 +58,32 @@ const AdminColaborator = () => {
           let newData = colaborators.map((colaborator) =>
             colaborator.id === data.id ? data : colaborator
           );
-          setColaborators(newData);
+          setColaborators(newData)
         } else {
           setError(res);
         }
       });
   };
 
-  const deleteData = (id) => {};
+  const deleteData = (id) => {
+    let isDelete = window.confirm(`¿Estás seguro de eliminar el registro con el id '${id}'`)
+   
+    if(isDelete){
+      let endPoint =`${Api}/users/${id}`
+      helpHttp()
+      .del(endPoint, {headers:{'Content-Type': 'application/json'}})
+      .then(res => {
+        if(!res.err){
+          let newData = colaborators.filter((colaborator)=> colaborator.id !== id);
+          setColaborators(newData)
+        }else{
+          setError(res)
+        }
+      })
+    }else{
+      return;
+    }
+  }
 
   return (
     <>
@@ -75,7 +94,7 @@ const AdminColaborator = () => {
         <CreateUsers
           createData={createData}
           updateData={updateData}
-          editColaborator={editColaborator}
+          editColaborator={editColaborator} //data to edit
           setEditColaborator={setEditColaborator}
         />
         {loading && <Loader />}

@@ -37,7 +37,7 @@ const Login = () => {
       if(response.accessToken && response.user.roles.admin === false ){
           navigate('/SelectorRol')
       }else if(response.accessToken && response.user.roles.admin === true){
-          navigate('/AdminColaborator')
+          navigate('/ManageOptions')
       }else{
         setInvalidData(response)
       }
