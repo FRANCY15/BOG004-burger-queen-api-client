@@ -12,31 +12,7 @@ const initialForm = {
 
 const FormOrders = ({ createData, order, price, setPrice, setOrder }) => {
   const [form, setForm] = useState(initialForm);
-<<<<<<< HEAD
-
-  useEffect(() => {
-    if (dataToEdit) {
-      setForm(dataToEdit);
-    } else {
-      setForm(initialForm);
-    }
-  }, [dataToEdit]);
-
-
-  const handleChange = (e) => {
-    setForm({
-            // ...form,
-      [e.target.name]: e.target.value,
-     
-    "userId": userId,
-    "products":  newOrder,
-    "status": 'pending',
-    "dateEntry": new Date()
-    });
-  };
-=======
   let [nameClient, setNameClient] = useState(null);
->>>>>>> 0061a060bc916e2354bcee3b04f823c2c4c18dad
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,29 +45,6 @@ const FormOrders = ({ createData, order, price, setPrice, setOrder }) => {
 
   return (
     <div>
-<<<<<<< HEAD
-      <h3>{dataToEdit ? "Edit info Client" : "Client Information"}</h3>
-     
-      <form className="Form-order" onSubmit={handleSubmit} >
-            <label htmlFor="client">Name Client</label>
-            <input 
-            type="text" 
-            name="client" 
-            placeholder='Name Client' 
-            onChange={handleChange}
-            value={form.client}
-            /><button onChange={handleChange}>Ver orden</button>
-            
-            <label htmlFor="table">User id</label>
-            <input 
-            type="text" 
-            name="table"
-            onChange={handleChange}
-            value={form.userId}
-            disabled
-            />
-            <table className="Table-order">
-=======
       <form className="Form-order" onSubmit={handleSubmit}>
         <label htmlFor="client">Name Client</label>
         <input
@@ -105,7 +58,6 @@ const FormOrders = ({ createData, order, price, setPrice, setOrder }) => {
         <label htmlFor="table">User id</label>
         <input type="text" name="table" value={form.userId} disabled />
         <table className="Table-order">
->>>>>>> 0061a060bc916e2354bcee3b04f823c2c4c18dad
               <thead>
                 <tr>
                   <th>Product</th>

@@ -9,15 +9,6 @@ const MenuView = ({order, setOrder, price, setPrice}) => {
   const [products, setProducts] = useState([]);
   const [option, setOption] = useState('');
   const [typeMn, setTypeMn] = useState([]);  
-<<<<<<< HEAD
-  const [order, setOrder] = useState([])
-  const {countqty , incrementQty, decrementQty} = useCouter(0); 
-  let [price, setPrice] = useState(0);
-  
-
-  let menu = [];
-=======
->>>>>>> 0061a060bc916e2354bcee3b04f823c2c4c18dad
 
   
   useEffect(() => {
@@ -53,7 +44,7 @@ const MenuView = ({order, setOrder, price, setPrice}) => {
             "qty": element.qty+1,
             "product":{
               ...element.product,
-              "price": (element.qty+1) * element.product.price
+              "price": (element.qty+1) * item.product.price
             }
           }
         }else{
@@ -75,7 +66,22 @@ const MenuView = ({order, setOrder, price, setPrice}) => {
       order[delProduct].qty --
       let findProd = typeMn.findIndex(({product})=> product.id === item.product.id);
       typeMn[findProd].qty = order[delProduct].qty
+      const newOrder3 = order.map((element) => {
+        if(element.product.id === item.product.id){
+          return {
+            "qty": element.qty,
+            "product":{
+              ...element.product,
+              "price": (element.qty) * item.product.price
+            }
+          }
+        
     }else{
+      return element
+    }
+  })
+  setOrder([...newOrder3])
+  }else{
       order.splice(delProduct, 1);
     }
     setPrice(price -= item.product.price)
