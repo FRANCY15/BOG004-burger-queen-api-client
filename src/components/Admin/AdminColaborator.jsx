@@ -7,6 +7,7 @@ import GenericNavbar from "../shared/GenericNavbar";
 import CreateUsers from "./CreateUsers";
 import ManageUsers from "./ManageUsers";
 import "../../assets/css/TableOrders.css";
+import { userToken } from "../Login/Login";
 
 const AdminColaborator = () => {
   const [colaborators, setColaborators] = useState([]);
@@ -18,6 +19,10 @@ const AdminColaborator = () => {
 
   useEffect(() => {
     setLoading(true);
+    getColaborators();
+  }, []);
+
+  const getColaborators = () => {
     helpHttp()
       .get(url)
       .then((res) => {
@@ -31,20 +36,22 @@ const AdminColaborator = () => {
         setLoading(false);
       })
       .catch(console.error);
-  }, [url]);
+  }
 
-  const createData = (data) => {
-    helpHttp()
-      .post(url, {
+  const createData = async (data) => {
+    await helpHttp()
+      .post(url, {headers: {"Content-Type": "application/json",
+        authorization: userToken},
         body: data,
       })
       .then((res) => {
-        if (!res.err) {
-          setColaborators([...colaborators, res]);
+        if (!res.err) { 
+          console.log(res)         
         } else {
           setError(res);
         }
       });
+      getColaborators()
   };
 
   const updateData = (data) => {

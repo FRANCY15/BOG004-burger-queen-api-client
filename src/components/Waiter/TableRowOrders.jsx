@@ -5,7 +5,6 @@ import { userToken } from "../Login/Login";
 import Clientorders from "./Clientorders";
 
 const TableRowOrders = ({ el, updateOrders }) => {
-console.log('EL', el);
 
   let { client, products, id } = el;
   const [statusOrder, setStatusOrder] = useState({});
@@ -29,7 +28,6 @@ console.log('EL', el);
         setStatusOrder(resp);
         updateOrders();
       });
-    console.log(statusOrder);
   };
 
   return (
