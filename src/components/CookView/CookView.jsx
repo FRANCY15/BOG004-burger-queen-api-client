@@ -3,7 +3,7 @@ import Api from "../../utils/Api";
 import { helpHttp } from "../helpers/helpHttp";
 import CookTableRowOrders from "./CookTableRowOrders";
 import "../../assets/css/TableOrders.css";
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 const CookView = () => {
@@ -47,7 +47,8 @@ const CookView = () => {
     <div>
         <nav className='Navbar'>
           <h3>Burger Queen</h3>
-        <button className="Navbar-btn" onClick={() => {cerrar()}}>LogOut</button>
+          <Link to="/SelectorRol" className="Navbar-btn">Selector Rol</Link>
+          <button className="Navbar-btn" onClick={() => {cerrar()}}>LogOut</button>
     </nav>
       <div className="styleCrudsOrders">
         <h3 className="Title">This is the order pending</h3>

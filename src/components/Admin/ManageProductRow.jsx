@@ -13,8 +13,8 @@ const ManageProductRow = ({product, setEditProduct, deleteProducts}) => {
         <td><img className='img-table' src={image} alt="Product" /></td>
         <td>{type}</td>
         <td>
-            <button onClick={() => setEditProduct(product)}>Edit Product</button>
-            <button onClick={()=>{deleteProducts(id)}}>Delete Product</button>
+            <button onClick={() => setEditProduct(product)}>Edit</button>
+            <button onClick={()=>{deleteProducts(id)}}>Delete</button>
         </td>
 
     </tr>
