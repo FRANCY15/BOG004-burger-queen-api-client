@@ -21,7 +21,6 @@ const SelectorRol = () => {
         <Link to="/CookView" className="btn" id="Cocinero" >Cocinero
           <img src={cocinero} alt="LogoCocinero" />
         </Link>
-        
       </section>
     </div>
     

@@ -18,8 +18,8 @@ const ManageUsers = ({colaborators, setEditColaborator, deleteData}) => {
                 </tr>
             </thead>
             <tbody>
-                {colaborators.length === 0 ? <tr><td colSpan='3'> Not data</td></tr> : colaborators.map((colaborator) => <ManageUserRow 
-                key={colaborator.id} 
+                {colaborators.length === 0 ? <tr><td colSpan='3'> Not data</td></tr> : colaborators.map((colaborator, index) => <ManageUserRow 
+                key={index} 
                 colaborator={colaborator}
                 setEditColaborator={setEditColaborator}
                 deleteData={deleteData}/>) }

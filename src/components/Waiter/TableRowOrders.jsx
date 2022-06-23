@@ -5,8 +5,17 @@ import { userToken } from "../Login/Login";
 import Clientorders from "./Clientorders";
 
 const TableRowOrders = ({ el, updateOrders }) => {
+console.log('EL', el);
+
   let { client, products, id } = el;
   const [statusOrder, setStatusOrder] = useState({});
+
+  let initTime = new Date(el.dateEntry)
+  let finalyTime = new Date(el.dateProcessed)
+
+  let totalTimeOrder = ((finalyTime.getTime() - initTime.getTime())/60000).toFixed(2)
+
+
 
   const updateStatus = () => {
     let url = `${Api}/orders/${id}`;
@@ -32,6 +41,7 @@ const TableRowOrders = ({ el, updateOrders }) => {
         </td>
         <td>
             <button onClick={updateStatus}>Delivered</button>
+            <div >Total order time: {totalTimeOrder} min</div>
         </td>
       </tr>
     </>

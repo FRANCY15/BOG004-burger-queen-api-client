@@ -2,20 +2,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../assets/css/login.css";
 import Api from "../../utils/Api";
-import userIcon from '../../assets/img/user'
-import keyIcon from '../../assets/img/key'
+import userIcon from "../../assets/img/user";
+import keyIcon from "../../assets/img/key";
 
-
-
-export const userToken = localStorage.getItem('userToken') 
-export const userId = localStorage.getItem('userId');
+export const userToken = localStorage.getItem("userToken");
+export const userId = localStorage.getItem("userId");
 
 const Login = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [invalidData, setInvalidData] = useState(null)
+  const [invalidData, setInvalidData] = useState(null);
   const navigate = useNavigate();
-    
+
   const validarLogin = (e) => {
     e.preventDefault();
 
@@ -28,21 +26,23 @@ const Login = () => {
         "Content-Type": "application/json",
       },
     })
-    .then(res => res.json())
-    .catch((error) => console.error("Error:", error))
-    .then((response) => {
-      localStorage.setItem('userToken', response.accessToken)
-      localStorage.setItem('userId', response.user.id)
+      .then((res) => res.json())
+      .then((response) => {
+        if (typeof response === "string") {
+          setInvalidData(response);
+          return;
+        }
+        localStorage.setItem("userToken", response.accessToken);
+        localStorage.setItem("userId", response.user.id);
 
-      if(response.accessToken && response.user.roles.admin === false ){
-          navigate('/SelectorRol')
-      }else if(response.accessToken && response.user.roles.admin === true){
-          navigate('/AdminColaborator')
-      }else{
-        setInvalidData(response)
-      }
-    })    
-    
+        if (response.accessToken && response.user.roles.admin === false) {
+          navigate("/SelectorRol");
+        } else if (response.accessToken && response.user.roles.admin === true) {
+          navigate("/ManageOptions");
+        } 
+      })
+      .catch((error) => console.error("Error este es el error:", error));
+
     e.target.reset();
     setUser(" ");
     setPassword(" ");
@@ -50,42 +50,40 @@ const Login = () => {
   };
 
   return (
-      <main className="login">
-          <form className="LoginForm" onSubmit={validarLogin}>
-            <h3>Burger Queen</h3>
-            <h4>Enter your credentials to Login</h4>
-            <div className="form-Input">
-            <img src={userIcon} alt="IconUser" />
-            <input
-              type="email"
-              id="email"
-              placeholder="enter your email"
-              onChange={(e) => setUser(e.target.value)}
-              data-testid="login-email-input"
-            />
-            </div>
-            <div className="form-Input">
-            <img src={keyIcon} alt="IconPassword" />
-            <input
-              type="password"
-              id="password"
-              placeholder="enter your password"
-              onChange={(e) => setPassword(e.target.value)}
-              data-testid="login-password-input"
-            />
-            </div>
-            <button className="btn-login" type="submit" data-testid="login-btn">
-              Login
-            </button>
-                {
-                  invalidData && (
-                    <div className="alert alert-danger" data-testid="login-error-message">
-                      {invalidData}
-                    </div>
-                  )
-                }
-          </form>
-      </main>
+    <main className="login">
+      <form className="LoginForm" onSubmit={validarLogin}>
+        <h3>Burger Queen</h3>
+        <h4>Enter your credentials to Login</h4>
+        <div className="form-Input">
+          <img src={userIcon} alt="IconUser" />
+          <input
+            type="email"
+            id="email"
+            placeholder="enter your email"
+            onChange={(e) => setUser(e.target.value)}
+            data-testid="login-email-input"
+          />
+        </div>
+        <div className="form-Input">
+          <img src={keyIcon} alt="IconPassword" />
+          <input
+            type="password"
+            id="password"
+            placeholder="enter your password"
+            onChange={(e) => setPassword(e.target.value)}
+            data-testid="login-password-input"
+          />
+        </div>
+        <button className="btn-login" type="submit" data-testid="login-btn">
+          Login
+        </button>
+        {invalidData && (
+          <div className="alert alert-danger" data-testid="login-error-message">
+            {invalidData}
+          </div>
+        )}
+      </form>
+    </main>
   );
 };
 

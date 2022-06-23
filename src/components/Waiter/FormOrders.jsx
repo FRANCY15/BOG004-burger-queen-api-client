@@ -56,7 +56,9 @@ const FormOrders = ({ createData, order, price, setPrice, setOrder }) => {
           }}
         />
         <label htmlFor="table">User id</label>
-        <input type="text" name="table" value={form.userId} disabled />
+        <input type="text" 
+        name="table" 
+        value={form.userId} disabled />
         <table className="Table-order">
               <thead>
                 <tr>

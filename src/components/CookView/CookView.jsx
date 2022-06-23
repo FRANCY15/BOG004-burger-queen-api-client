@@ -3,12 +3,14 @@ import Api from "../../utils/Api";
 import { helpHttp } from "../helpers/helpHttp";
 import CookTableRowOrders from "./CookTableRowOrders";
 import "../../assets/css/TableOrders.css";
-import GenericNavbar from "../shared/GenericNavbar";
+import { useNavigate, Link } from 'react-router-dom'
+
 
 
 const CookView = () => {
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
+  const Navigate = useNavigate('');
 
   let url = `${Api}/orders`;
 
@@ -37,11 +39,20 @@ const CookView = () => {
       });
   };
 
+  const cerrar = () => {
+    localStorage.clear()
+    Navigate("/")
+  }
+
   return (
     <div>
-      <GenericNavbar />
+        <nav className='Navbar'>
+          <h3>Burger Queen</h3>
+          <Link to="/SelectorRol" className="Navbar-btn">Selector Rol</Link>
+        <button className="Navbar-btn" onClick={() => {cerrar()}}>LogOut</button>
+    </nav>
       <div className="styleCrudsOrders">
-        <h3>This is the order pending</h3>
+        <h3 className="Title">This is the order pending</h3>
         <table className="Table-order">
           <thead>
             <tr>
