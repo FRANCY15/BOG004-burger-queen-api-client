@@ -4,6 +4,7 @@ import "../../assets/css/login.css";
 import Api from "../../utils/Api";
 import userIcon from "../../assets/img/user";
 import keyIcon from "../../assets/img/key";
+import { helpHttp } from "../helpers/helpHttp";
 
 export const userToken = localStorage.getItem("userToken");
 export const userId = localStorage.getItem("userId");
@@ -18,15 +19,10 @@ const Login = () => {
     e.preventDefault();
 
     const data = { email: user, password: password };
+    const url = `${Api}/login`;
 
-    fetch(`${Api}/login`, {
-      method: "POST", // or 'PUT'
-      body: JSON.stringify(data), // data can be `string` or {object}!
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
+    helpHttp()
+    .post(url, {headers: {"Content-Type": "application/json"}, body: data})
       .then((response) => {
         if (typeof response === "string") {
           setInvalidData(response);

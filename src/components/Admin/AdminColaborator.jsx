@@ -19,6 +19,10 @@ const AdminColaborator = () => {
 
   useEffect(() => {
     setLoading(true);
+    getColaborators();
+  }, []);
+
+  const getColaborators = () => {
     helpHttp()
       .get(url)
       .then((res) => {
@@ -32,30 +36,22 @@ const AdminColaborator = () => {
         setLoading(false);
       })
       .catch(console.error);
-  }, [url]);
+  }
 
-  const createData = (data) => {
-
-    fetch(url, {
-      method: "POST", // or 'PUT'
-      body: JSON.stringify(data), // data can be `string` or {object}!
-      headers: {
-        "Content-Type": "application/json",
-        authorization: userToken,
-      },
-    })
-
-    // helpHttp()
-    //   .post(url, {
-    //     body: data,
-    //   })
+  const createData = async (data) => {
+    await helpHttp()
+      .post(url, {headers: {"Content-Type": "application/json",
+        authorization: userToken},
+        body: data,
+      })
       .then((res) => {
-        if (!res.err) {
-          setColaborators([...colaborators, res]);
+        if (!res.err) { 
+          console.log(res)         
         } else {
           setError(res);
         }
       });
+      getColaborators()
   };
 
   const updateData = (data) => {
