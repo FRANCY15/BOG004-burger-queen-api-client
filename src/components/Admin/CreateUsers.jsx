@@ -35,7 +35,7 @@ const handleChange = (e) => {
         email: email,
         password: password,
         roles: {
-            admin: e.target.value
+            admin: e.target.value==="true"? true : false
         },
     })
     
