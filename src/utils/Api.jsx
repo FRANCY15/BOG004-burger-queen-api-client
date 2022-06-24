@@ -1,3 +1,3 @@
-const Api = 'http://127.0.0.1:8080';
+const Api = 'https://apimock-burgerqueen-lab2022.herokuapp.com/';
 
 export default Api;
